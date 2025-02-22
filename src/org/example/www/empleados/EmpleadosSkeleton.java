@@ -91,7 +91,7 @@ import ConexionDB.Conexion;
                      }
                      
                      else  {
-                    	 response.setOut("Ha ocurrido algún error a la hora de insertar un empleado");
+                    	 response.setOut("Ha ocurrido algún error a la hora de insertar el empleado");
                      }
 
                      return response;

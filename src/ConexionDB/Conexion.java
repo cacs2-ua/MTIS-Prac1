@@ -246,7 +246,6 @@ public class Conexion {
             e.printStackTrace();
             return false;
         } finally {
-            // Cerrar recursos en el finally
             if (stmt != null) {
                 try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
