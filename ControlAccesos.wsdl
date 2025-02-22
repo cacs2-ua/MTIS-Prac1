@@ -31,7 +31,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="out"
-      				type="tns:InstanciaRegistroAccesosType">
+      				type="tns:InstanciaRegistroAccesosType" maxOccurs="unbounded" minOccurs="0">
       			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>

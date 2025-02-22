@@ -105,4 +105,50 @@ public class Conexion {
             }
         }
     }
+    
+    public boolean insertarRegistroAcceso(
+    		String nifnie,
+    		int codigoSala,
+    		int codigoDispositivo
+
+    ) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = this.conectar();
+
+            String sql = "INSERT INTO empleados "
+                       + "(nifnie, nombreApellidos, email, naf, iban, idNivel, usuario, password, valido) "
+                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nifnie);
+            stmt.setString(2, nombreApellidos);
+            stmt.setString(3, email);
+            stmt.setString(4, naf);
+            stmt.setString(5, iban);
+            stmt.setInt(6, idNivel);
+            stmt.setString(7, usuario);
+            stmt.setString(8, password);
+            stmt.setInt(9, valido);
+
+            // 4. Ejecutar la inserción
+            int filasAfectadas = stmt.executeUpdate();
+
+            // 5. Devolver true si se insertó al menos 1 fila
+            return (filasAfectadas > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Cerrar recursos en el finally
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    }
 }
