@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 
 public class Conexion {
     // Datos de conexión a la base de datos
@@ -220,26 +223,23 @@ public class Conexion {
         PreparedStatement stmt = null;
         try {
             con = this.conectar();
+            
+            int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
+            int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
+            int idDispositivo = obtenerIdDispositivoAPartirDeCodigoDispositivo(codigoDispositivo);
+            Timestamp fechaHora = Timestamp.valueOf(LocalDateTime.now());
 
-            String sql = "INSERT INTO empleados "
-                       + "(nifnie, nombreApellidos, email, naf, iban, idNivel, usuario, password, valido) "
-                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+            String sql = "INSERT INTO registroaccesos "
+                       + "(idEmpleado, idSala, idDispositivo, fechaHora) "
+                       + "VALUES (?, ?, ?, ?)";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, nifnie);
-            stmt.setString(2, nombreApellidos);
-            stmt.setString(3, email);
-            stmt.setString(4, naf);
-            stmt.setString(5, iban);
-            stmt.setInt(6, idNivel);
-            stmt.setString(7, usuario);
-            stmt.setString(8, password);
-            stmt.setInt(9, valido);
-
-            // 4. Ejecutar la inserción
+            stmt.setInt(1, idEmpleado);
+            stmt.setInt(2, idSala);
+            stmt.setInt(3, idDispositivo);
+            stmt.setTimestamp(4, fechaHora);
+            
             int filasAfectadas = stmt.executeUpdate();
-
-            // 5. Devolver true si se insertó al menos 1 fila
+            
             return (filasAfectadas > 0);
 
         } catch (SQLException e) {
