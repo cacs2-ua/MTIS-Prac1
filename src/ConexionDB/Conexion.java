@@ -106,6 +106,41 @@ public class Conexion {
         }
     }
     
+    public int obtenerIdEmpleadoAPartirDeNifNie(String nifnie) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = this.conectar();
+            
+            String sql = "SELECT id FROM empleados WHERE nifnie = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nifnie);
+            
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            } else {
+                return -1;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        } finally {
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    }
+
+    
     public boolean insertarRegistroAcceso(
     		String nifnie,
     		int codigoSala,
