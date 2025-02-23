@@ -41,6 +41,16 @@
                   }
 
               
+                  if (
+                  "http://www.example.org/ControlAccesos/".equals(namespaceURI) &&
+                  "FechasRegistroAccesosType".equals(typeName)){
+                   
+                            return  org.example.www.controlaccesos.FechasRegistroAccesosType.Factory.parse(reader);
+                        
+
+                  }
+
+              
              throw new org.apache.axis2.databinding.ADBException("Unsupported type " + namespaceURI + " " + typeName);
           }
 

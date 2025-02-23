@@ -30,14 +30,14 @@
                         */
 
                         
-                                    protected org.example.www.controlaccesos.RegistroAccesosType localIn ;
+                                    protected org.example.www.controlaccesos.FechasRegistroAccesosType localIn ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return org.example.www.controlaccesos.RegistroAccesosType
+                           * @return org.example.www.controlaccesos.FechasRegistroAccesosType
                            */
-                           public  org.example.www.controlaccesos.RegistroAccesosType getIn(){
+                           public  org.example.www.controlaccesos.FechasRegistroAccesosType getIn(){
                                return localIn;
                            }
 
@@ -47,7 +47,7 @@
                                * Auto generated setter method
                                * @param param In
                                */
-                               public void setIn(org.example.www.controlaccesos.RegistroAccesosType param){
+                               public void setIn(org.example.www.controlaccesos.FechasRegistroAccesosType param){
                             
                                             this.localIn=param;
                                        
@@ -394,7 +394,7 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","in").equals(reader.getName())){
                                 
-                                                object.setIn(org.example.www.controlaccesos.RegistroAccesosType.Factory.parse(reader));
+                                                object.setIn(org.example.www.controlaccesos.FechasRegistroAccesosType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

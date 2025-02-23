@@ -20,7 +20,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="in" type="tns:RegistroAccesosType">
+      			<xsd:element name="in" type="tns:FechasRegistroAccesosType">
       			</xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -50,6 +50,16 @@
       		<xsd:element name="idSala" type="xsd:int"/>
       		<xsd:element name="idDispositivo" type="xsd:int"/>
       		<xsd:element name="fechaHora" type="xsd:dateTime"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="FechasRegistroAccesosType">
+      	<xsd:sequence>
+      		<xsd:element name="nifnie" type="xsd:string"/>
+      		<xsd:element name="codigoSala" type="xsd:int"/>
+      		<xsd:element name="codigoDispositivo" type="xsd:int"/>
+      		<xsd:element name="fechaDesde" type="xsd:dateTime"/>
+      		<xsd:element name="fechaHasta" type="xsd:dateTime"/>
       	</xsd:sequence>
       </xsd:complexType>
     </xsd:schema>

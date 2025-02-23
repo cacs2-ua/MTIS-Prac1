@@ -7,9 +7,13 @@
  */
     package org.example.www.controlaccesos;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import org.example.www.empleados.NuevoResponse;
 
 import ConexionDB.Conexion;
+import ConexionDB.RegistroAccesosRepository;
 
 /**
      *  ControlAccesosSkeleton java skeleton for the axisService
@@ -24,13 +28,29 @@ import ConexionDB.Conexion;
              * @return consultarResponse 
          */
         
-                 public org.example.www.controlaccesos.ConsultarResponse consultar
-                  (
-                  org.example.www.controlaccesos.Consultar consultar
-                  )
-            {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#consultar");
+    	public org.example.www.controlaccesos.ConsultarResponse consultar(
+                org.example.www.controlaccesos.Consultar consultar) {
+
+            ConsultarResponse response = new ConsultarResponse();
+
+            String nifNie = consultar.getIn().getNifnie();
+            int codigoSala = consultar.getIn().getCodigoSala();
+            int codigoDispositivo = consultar.getIn().getCodigoDispositivo();
+            Timestamp fechaDesde = new Timestamp(consultar.getIn().getFechaDesde().getTimeInMillis());
+            Timestamp fechaHasta = new Timestamp(consultar.getIn().getFechaHasta().getTimeInMillis());
+
+            RegistroAccesosRepository registroAccesosRepository = new RegistroAccesosRepository();
+
+            List<InstanciaRegistroAccesosType> registros = registroAccesosRepository
+                    .consultarRegistrosAcceso(nifNie, codigoSala, codigoDispositivo, fechaDesde, fechaHasta);
+
+            if (!registros.isEmpty()) {
+                response.setOut(registros.toArray(new InstanciaRegistroAccesosType[0]));
+            } else {
+                response.setOut(new InstanciaRegistroAccesosType[0]); // Array vacío si no hay registros
+            }
+
+            return response;
         }
      
          

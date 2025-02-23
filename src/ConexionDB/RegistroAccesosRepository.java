@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.example.www.controlaccesos.InstanciaRegistroAccesosType;
 
 public class RegistroAccesosRepository {
     private Conexion conexion;
@@ -119,52 +124,53 @@ public class RegistroAccesosRepository {
         }
     }
     
-    public boolean consultarRegistroAcceso (
-    		String nifnie,
-    		int codigoSala,
-    		int codigoDispositivo,
-    		Timestamp fechaDesde,
-    		Timestamp fechaHasta
-    		) {
+    public List<InstanciaRegistroAccesosType> consultarRegistrosAcceso(
+            String nifnie, int codigoSala, int codigoDispositivo, Timestamp fechaDesde, Timestamp fechaHasta) {
+
+        List<InstanciaRegistroAccesosType> registros = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;
-        
+        ResultSet rs = null;
+
         try {
-        	con = this.conexion.conectar();
-        	
-        	int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
+            con = this.conexion.conectar();
+
+            int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
             int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
             int idDispositivo = obtenerIdDispositivoAPartirDeCodigoDispositivo(codigoDispositivo);
-            
-            String sql =  "SELECT * FROM registroaccesos where "
-            		    + "idEmpleado = ? and "
-            		    + "idSala = ? and "
-            		    + "idDispositivo = ? and "
-            		    + "fechaHora >= ? and "
-            		    + "fechaHora <= ?";
-            
+
+            String sql = "SELECT * FROM registroaccesos WHERE idEmpleado = ? AND idSala = ? AND idDispositivo = ? AND fechaHora BETWEEN ? AND ?";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, idEmpleado);
             stmt.setInt(2, idSala);
             stmt.setInt(3, idDispositivo);
             stmt.setTimestamp(4, fechaDesde);
             stmt.setTimestamp(5, fechaHasta);
-            
-            int filasAfectadas = stmt.executeUpdate();
-            
-            return (filasAfectadas > 0);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            if (stmt != null) {
-                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
-            if (con != null) {
-                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
-        }
-    }
 
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                InstanciaRegistroAccesosType registro = new InstanciaRegistroAccesosType();
+                registro.setId(rs.getInt("id"));
+                registro.setIdEmpleado(rs.getInt("idEmpleado"));
+                registro.setIdSala(rs.getInt("idSala"));
+                registro.setIdDispositivo(rs.getInt("idDispositivo"));
+                
+                Calendar fechaHora = Calendar.getInstance();
+                fechaHora.setTimeInMillis(rs.getTimestamp("fechaHora").getTime());
+                registro.setFechaHora(fechaHora);
+
+                registros.add(registro);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (con != null) con.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+
+        return registros;
+    }
 }
