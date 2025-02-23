@@ -122,13 +122,48 @@ public class RegistroAccesosRepository {
     public boolean consultarRegistroAcceso (
     		String nifnie,
     		int codigoSala,
-    		int codigoDispositivo
+    		int codigoDispositivo,
+    		Timestamp fechaDesde,
+    		Timestamp fechaHasta
     		) {
         Connection con = null;
         PreparedStatement stmt = null;
         
         try {
         	con = this.conexion.conectar();
+        	
+        	int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
+            int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
+            int idDispositivo = obtenerIdDispositivoAPartirDeCodigoDispositivo(codigoDispositivo);
+            
+            String sql =  "SELECT * FROM registroaccesos where "
+            		    + "idEmpleado = ? and "
+            		    + "idSala = ? and "
+            		    + "idDispositivo = ? and "
+            		    + "fechaHora >= ? and "
+            		    + "fechaHora <= ?";
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEmpleado);
+            stmt.setInt(2, idSala);
+            stmt.setInt(3, idDispositivo);
+            stmt.setTimestamp(4, fechaDesde);
+            stmt.setTimestamp(5, fechaHasta);
+            
+            int filasAfectadas = stmt.executeUpdate();
+            
+            return (filasAfectadas > 0);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
         }
     }
 
