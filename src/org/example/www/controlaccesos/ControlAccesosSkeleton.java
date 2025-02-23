@@ -30,8 +30,17 @@ import ConexionDB.RegistroAccesosRepository;
         
     	public org.example.www.controlaccesos.ConsultarResponse consultar(
                 org.example.www.controlaccesos.Consultar consultar) {
-
+    		
             ConsultarResponse response = new ConsultarResponse();
+            
+    		String WSKey = consultar.getIn().getWSKey();
+    		
+    		System.out.println("Valor de WSKey: " + WSKey);
+    		
+    		if (!"soap-mtis-prac1".equals(WSKey)) { 
+    		    response.setMensaje("Acceso no autorizado a la BD");
+    		    return response;
+    		}
 
             String nifNie = consultar.getIn().getNifnie();
             int codigoSala = consultar.getIn().getCodigoSala();
