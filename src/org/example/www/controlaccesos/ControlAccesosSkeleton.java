@@ -33,12 +33,16 @@ import ConexionDB.RegistroAccesosRepository;
     		
             ConsultarResponse response = new ConsultarResponse();
             
+            Conexion cn = new Conexion();
+            
+            String WSKeyDB = cn.obtenerWSKey();
+            
     		String WSKey = consultar.getIn().getWSKey();
     		
     		System.out.println("Valor de WSKey: " + WSKey);
     		
-    		if (!"soap-mtis-prac1".equals(WSKey)) { 
-    		    response.setMensaje("Acceso no autorizado a la BD");
+    		if (!WSKeyDB.equals(WSKey)) { 
+    		    response.setMensaje("Acceso no autorizado");
     		    return response;
     		}
 

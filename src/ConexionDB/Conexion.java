@@ -57,6 +57,38 @@ public class Conexion {
             return false;
         }
     }
+    
+    public String obtenerWSKey() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = this.conectar();
+            String sql = "SELECT * FROM soapkey where id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, 1);  
+            
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("soap_key");
+            } else {
+                return "ERROR";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "ERROR";
+        } finally {
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    }
 
     public boolean insertarEmpleado(
             String nifnie,
