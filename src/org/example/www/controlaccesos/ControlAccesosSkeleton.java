@@ -47,7 +47,7 @@ import ConexionDB.RegistroAccesosRepository;
             if (!registros.isEmpty()) {
                 response.setOut(registros.toArray(new InstanciaRegistroAccesosType[0]));
             } else {
-                response.setOut(new InstanciaRegistroAccesosType[0]); // Array vacío si no hay registros
+                response.setOut(new InstanciaRegistroAccesosType[0]);
             }
 
             return response;
