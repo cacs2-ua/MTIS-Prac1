@@ -47,7 +47,7 @@ import ConexionDB.RegistroAccesosRepository;
             if (!registros.isEmpty()) {
                 response.setOut(registros.toArray(new InstanciaRegistroAccesosType[0]));
             } else {
-                response.setOut(new InstanciaRegistroAccesosType[0]);
+                response.setMensaje("No existe ningún registro en la BD con los criterios aplicados");
             }
 
             return response;

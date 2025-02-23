@@ -105,6 +105,48 @@
                              }
                              
 
+                        /**
+                        * field for Mensaje
+                        */
+
+                        
+                                    protected java.lang.String localMensaje ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localMensajeTracker = false ;
+
+                           public boolean isMensajeSpecified(){
+                               return localMensajeTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMensaje(){
+                               return localMensaje;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Mensaje
+                               */
+                               public void setMensaje(java.lang.String param){
+                            localMensajeTracker = param != null;
+                                   
+                                            this.localMensaje=param;
+                                       
+
+                               }
+                            
+
      
      
         /**
@@ -181,7 +223,25 @@
                                                throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
                                         
                                     }
-                                 }
+                                 } if (localMensajeTracker){
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "mensaje", xmlWriter);
+                             
+
+                                          if (localMensaje==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localMensaje);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -387,7 +447,16 @@
                                     
                              }
 
-                        }
+                        } if (localMensajeTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "mensaje"));
+                                 
+                                        if (localMensaje != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensaje));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+                                        }
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -505,6 +574,30 @@
                                                                 org.example.www.controlaccesos.InstanciaRegistroAccesosType.class,
                                                                 list1));
                                                             
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensaje").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensaje" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setMensaje(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
                               }  // End of if for expected property start element
                                 
                                     else {
