@@ -27,21 +27,30 @@ import ConexionDB.RegistroAccesosRepository;
                                      * @param consultar 
              * @return consultarResponse 
          */
+    	
+    	public boolean verificarWSKey(String WSKey) {
+            Conexion cn = new Conexion();
+            
+            String WSKeyDB = cn.obtenerWSKey();
+            
+    		if (WSKeyDB.equals(WSKey)){
+    			return true;
+    		}
+    		
+    		else {
+    			return false;
+    		}
+    		
+    	}
         
     	public org.example.www.controlaccesos.ConsultarResponse consultar(
                 org.example.www.controlaccesos.Consultar consultar) {
     		
             ConsultarResponse response = new ConsultarResponse();
             
-            Conexion cn = new Conexion();
-            
-            String WSKeyDB = cn.obtenerWSKey();
-            
     		String WSKey = consultar.getIn().getWSKey();
     		
-    		System.out.println("Valor de WSKey: " + WSKey);
-    		
-    		if (!WSKeyDB.equals(WSKey)) { 
+    		if (!verificarWSKey(WSKey)) { 
     		    response.setMensaje("Acceso no autorizado");
     		    return response;
     		}
@@ -85,7 +94,17 @@ import ConexionDB.RegistroAccesosRepository;
                      int codigoSala = registrar.getIn().getCodigoSala();
                      int codigoDispositivo = registrar.getIn().getCodigoDispositivo();
                      
+             		 String WSKey = registrar.getIn().getWSKey();
+              		
+             		 if (!verificarWSKey(WSKey)) { 
+             		    response.setOut("Acceso no autorizado");
+             		    return response;
+             		 }
+                     
                      Conexion conexion = new Conexion();
+                    
+                     
+
                      
                      boolean exito = conexion.insertarRegistroAcceso(
                     		 nifNie, 
