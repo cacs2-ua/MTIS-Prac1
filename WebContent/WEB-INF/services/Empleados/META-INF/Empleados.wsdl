@@ -21,6 +21,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="nifnie" type="xsd:string"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -53,6 +54,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="nifnie" type="xsd:string"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -77,6 +79,7 @@
       		<xsd:element name="password" type="xsd:string"/>
       		<xsd:element name="valido" type="xsd:int"/>
       		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="WSKey" type="xsd:string"/>
       	</xsd:sequence>
       </xsd:complexType>
     

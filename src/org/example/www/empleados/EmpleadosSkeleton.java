@@ -8,6 +8,8 @@
     package org.example.www.empleados;
 
 import ConexionDB.Conexion;
+import ConexionDB.EmpleadoRepository;
+import utils.*;
 
 /**
      *  EmpleadosSkeleton java skeleton for the axisService
@@ -111,8 +113,30 @@ import ConexionDB.Conexion;
                   org.example.www.empleados.Borrar borrar
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#borrar");
+                	 BorrarResponse response = new BorrarResponse();
+                	 
+                	 String WSKey = borrar.getWSKey();
+                	 
+             		if (!Utils.verificarWSKey(WSKey)) { 
+            		    response.setOut("Acceso no autorizado");
+            		    return response;
+            		}
+             		
+             		String nifnie = borrar.getNifnie();
+             		
+             		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
+             		
+             		boolean exito = empleadoRepository.borrarEmpleado(nifnie);
+             		
+             		if (exito == true) {
+             			response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
+        
+             		}
+             		
+             		else {
+             			response.setOut("Ha ocurrido algún error al borrar el empleado con nifnie: " + nifnie);
+             		}
+             		return response;
         }
      
     }
