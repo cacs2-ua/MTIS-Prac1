@@ -7,6 +7,7 @@
  */
     package org.example.www.controlaccesos;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -81,12 +82,13 @@ import utils.*;
                                      * @param registrar 
              * @return registrarResponse 
          * @throws WSKeyNoValidaException   
+         * @throws SQLException 
          */
         
                  public org.example.www.controlaccesos.RegistrarResponse registrar
                   (
                   org.example.www.controlaccesos.Registrar registrar
-                  ) throws WSKeyNoValidaException
+                  ) throws WSKeyNoValidaException, SQLException
             {
                      RegistrarResponse response = new RegistrarResponse();
                      
@@ -99,8 +101,7 @@ import utils.*;
              		 Utils.verificarWSKey(WSKey);
                      
                      Conexion conexion = new Conexion();
-                    
-                     
+                                        
                      boolean exito = conexion.insertarRegistroAcceso(
                     		 nifNie, 
                     		 codigoSala, 

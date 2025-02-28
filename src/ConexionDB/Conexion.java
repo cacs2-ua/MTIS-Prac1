@@ -250,7 +250,7 @@ public class Conexion {
     		int codigoSala,
     		int codigoDispositivo
 
-    ) {
+    ) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -276,7 +276,8 @@ public class Conexion {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            throw new SQLException("No se ha podido insertar el registro de acceso. "
+            		+ "La combinación elegida de parámetros de entrada no existe en la BD. ");
         } finally {
             if (stmt != null) {
                 try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
