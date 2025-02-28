@@ -9,6 +9,8 @@
     /**
      *  ValidacionesSkeleton java skeleton for the axisService
      */
+    
+    import utils.*;
     public class ValidacionesSkeleton{
         
          

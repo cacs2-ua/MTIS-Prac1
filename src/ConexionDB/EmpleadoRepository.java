@@ -10,14 +10,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+import exception.*;
+import org.example.www.validaciones.*;
 import org.example.www.controlaccesos.InstanciaRegistroAccesosType;
+import org.example.www.empleados.EmpleadosType;
 
 public class EmpleadoRepository {
 	private Conexion conexion;
+	private ValidacionesSkeleton validaciones;
 	
 	public EmpleadoRepository() {
 		this.conexion = new Conexion();
+		this.validaciones = new ValidacionesSkeleton();
 	}
 	
 	public boolean borrarEmpleado (String nifnie) {
@@ -49,5 +53,15 @@ public class EmpleadoRepository {
         }
         
 	}
+	
+	/*
+	
+	public void modificarEmpleado (EmpleadosType datosEmpleado) {
+		String nifnie = datosEmpleado.getNifnie();
+		if (!validarNIF(nifnie))
+		
+	}
+	
+	*/
 
 }

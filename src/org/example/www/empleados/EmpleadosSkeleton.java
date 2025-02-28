@@ -9,6 +9,7 @@
 
 import ConexionDB.Conexion;
 import ConexionDB.EmpleadoRepository;
+import exception.WSKeyNoValidaException;
 import utils.*;
 
 /**
@@ -106,21 +107,20 @@ import utils.*;
          * 
                                      * @param borrar 
              * @return borrarResponse 
+         * @throws WSKeyNoValidaException 
          */
         
                  public org.example.www.empleados.BorrarResponse borrar
                   (
                   org.example.www.empleados.Borrar borrar
-                  )
+                  ) throws WSKeyNoValidaException
             {
-                	 BorrarResponse response = new BorrarResponse();
                 	 
-                	 String WSKey = borrar.getWSKey();
+                	BorrarResponse response = new BorrarResponse();
                 	 
-             		if (!Utils.verificarWSKey(WSKey)) { 
-            		    response.setOut("Acceso no autorizado");
-            		    return response;
-            		}
+                	String WSKey = borrar.getWSKey();
+                	 
+             		Utils.verificarWSKey(WSKey);
              		
              		String nifnie = borrar.getNifnie();
              		

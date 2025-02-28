@@ -14,6 +14,8 @@ import org.example.www.empleados.NuevoResponse;
 
 import ConexionDB.Conexion;
 import ConexionDB.RegistroAccesosRepository;
+import exception.WSKeyNoValidaException;
+import utils.*;
 
 /**
      *  ControlAccesosSkeleton java skeleton for the axisService
@@ -44,16 +46,13 @@ import ConexionDB.RegistroAccesosRepository;
     	}
         
     	public org.example.www.controlaccesos.ConsultarResponse consultar(
-                org.example.www.controlaccesos.Consultar consultar) {
+                org.example.www.controlaccesos.Consultar consultar) throws WSKeyNoValidaException {
     		
             ConsultarResponse response = new ConsultarResponse();
             
     		String WSKey = consultar.getIn().getWSKey();
     		
-    		if (!verificarWSKey(WSKey)) { 
-    		    response.setMensaje("Acceso no autorizado");
-    		    return response;
-    		}
+    		Utils.verificarWSKey(WSKey);
 
             String nifNie = consultar.getIn().getNifnie();
             int codigoSala = consultar.getIn().getCodigoSala();
@@ -81,12 +80,13 @@ import ConexionDB.RegistroAccesosRepository;
          * 
                                      * @param registrar 
              * @return registrarResponse 
+         * @throws WSKeyNoValidaException   
          */
         
                  public org.example.www.controlaccesos.RegistrarResponse registrar
                   (
                   org.example.www.controlaccesos.Registrar registrar
-                  )
+                  ) throws WSKeyNoValidaException
             {
                      RegistrarResponse response = new RegistrarResponse();
                      
@@ -96,15 +96,10 @@ import ConexionDB.RegistroAccesosRepository;
                      
              		 String WSKey = registrar.getIn().getWSKey();
               		
-             		 if (!verificarWSKey(WSKey)) { 
-             		    response.setOut("Acceso no autorizado");
-             		    return response;
-             		 }
+             		 Utils.verificarWSKey(WSKey);
                      
                      Conexion conexion = new Conexion();
                     
-                     
-
                      
                      boolean exito = conexion.insertarRegistroAcceso(
                     		 nifNie, 
