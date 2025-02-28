@@ -124,6 +124,8 @@ import utils.*;
              		
              		String nifnie = borrar.getNifnie();
              		
+             		Utils.validarNIFNIE(nifnie);
+             		
              		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
              		
              		boolean exito = empleadoRepository.borrarEmpleado(nifnie);
@@ -136,6 +138,7 @@ import utils.*;
              		else {
              			response.setOut("Ha ocurrido algún error al borrar el empleado con nifnie: " + nifnie);
              		}
+             		
              		return response;
         }
      

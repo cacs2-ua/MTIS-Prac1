@@ -43,6 +43,12 @@ public final class Utils {
     	
     }
     
+    public static void validarNIFNIE (String nifnie) {
+    	if (!validarNIF(nifnie) && !validarNIE(nifnie)) {
+    		throw new InvalidNIFNIEException("ERROR: el nif/nie introducido no es válido. ");
+    	}
+    }
+    
     public static boolean validarNAF (String NAF) {
     	ValidarNAF validarNAFRequest = new ValidarNAF();
         validarNAFRequest.setNAF(NAF);
@@ -80,12 +86,12 @@ public final class Utils {
     }
     
     
-    public static boolean realizarValidaciones (String nifnie,
+    public static void validarEmpleado (String nifnie,
     											String NAF,
     											String IBAN) {
     	
     	if (!esFormatoNIF(nifnie) && !esFormatoNIE(nifnie)) {
-    		throw new InvalidNIFNIEException("ERROR en la identificación del empleado: el empleado no está identificado ni por NIF ni por NIE: ");
+    		throw new InvalidNIFNIEException("ERROR: el nif/nie introducido no es válido. ");
     	}
     	
     	if (esFormatoNIF(nifnie) && !validarNIF(nifnie)) {
@@ -104,7 +110,6 @@ public final class Utils {
     		throw new InvalidIBANException("El IBAN proporcionado no es válido: " + IBAN);
     	}
     	
-    	return true;
     }
 
 }
