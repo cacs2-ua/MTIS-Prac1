@@ -41,7 +41,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="codigoSala" type="xsd:string"></xsd:element>
+      			<xsd:element name="codigoSala" type="xsd:int"></xsd:element>
       			<xsd:element name="WSKey" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>

@@ -182,19 +182,14 @@ public class ControlPresenciaRepository {
         	
         	int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
         	
-        	String sql = "SELECT e.* FROM empleados e "
+        	String sql = "SELECT DISTINCT e.* FROM empleados e "
         				+ "JOIN registroaccesos r on r.idEmpleado = e.id "
         				+ "JOIN salas s on r.idSala = s.id "
-        				+ "WHERE s.id = ?;";
+        				+ "WHERE s.id = ? ;";
         	stmt = con.prepareStatement(sql);
         	stmt.setInt(1, idSala);
         	rs = stmt.executeQuery();
-            if (!rs.next()) {
-                throw new NoSuchElementException("ADVERTENCIA: No existen usuarios asignados a "
-                								+ "controles de presencia "
-                								+ "con las caracteristicas especificadas. ");
-            }
-            
+
             while (rs.next()) {
             	EmpleadosType registro = new EmpleadosType();
                 registro.setId(rs.getInt("id"));
@@ -210,6 +205,12 @@ public class ControlPresenciaRepository {
 
                 registros.add(registro);
             }
+            
+            if (registros.isEmpty()) {
+                throw new NoSuchElementException("ADVERTENCIA: No existen usuarios asignados a dicha "
+                								+ "combinación de parámetros de entrada. ");
+            }
+            
             return registros;
             
         } catch (SQLException e) {

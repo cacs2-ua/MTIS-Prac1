@@ -30,14 +30,14 @@
                         */
 
                         
-                                    protected java.lang.String localCodigoSala ;
+                                    protected int localCodigoSala ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getCodigoSala(){
+                           public  int getCodigoSala(){
                                return localCodigoSala;
                            }
 
@@ -47,7 +47,7 @@
                                * Auto generated setter method
                                * @param param CodigoSala
                                */
-                               public void setCodigoSala(java.lang.String param){
+                               public void setCodigoSala(int param){
                             
                                             this.localCodigoSala=param;
                                        
@@ -147,18 +147,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "codigoSala", xmlWriter);
                              
-
-                                          if (localCodigoSala==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCodigoSala);
-                                            
-                                          }
+                                               if (localCodigoSala==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -368,12 +363,9 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "codigoSala"));
                                  
-                                        if (localCodigoSala != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
+                            
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "WSKey"));
                                  
@@ -472,7 +464,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setCodigoSala(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     

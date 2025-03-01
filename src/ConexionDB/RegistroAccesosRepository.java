@@ -192,10 +192,6 @@ public class RegistroAccesosRepository {
             stmt.setTimestamp(5, fechaHasta);
 
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-                throw new NoSuchElementException("ADVERTENCIA: No existen registros de acceso "
-                						+ "con las caracteristicas especificadas. ");
-            }
 
             while (rs.next()) {
                 InstanciaRegistroAccesosType registro = new InstanciaRegistroAccesosType();
@@ -209,6 +205,11 @@ public class RegistroAccesosRepository {
                 registro.setFechaHora(fechaHora);
 
                 registros.add(registro);
+            }
+             
+            if (registros.isEmpty()) {
+                throw new NoSuchElementException("ADVERTENCIA: No existen registros de acceso "
+                						+ "con las caracteristicas especificadas. ");
             }
             
             return registros;

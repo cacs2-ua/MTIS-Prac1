@@ -116,9 +116,16 @@
                  		 
                  		 int codigoSala = controlEmpleadoSala.getCodigoSala();
                  		 
-                 		List<EmpleadosType> registros = this.controlPresenciaRepository()
+                 		 List<EmpleadosType> registros = this.controlPresenciaRepository.controlEmpleadosSala(codigoSala);
+                 		 
+                 		 response.setEmpleadosOut(registros.toArray(new EmpleadosType[0]));
+                 		 response.setMensajeSalida("Lista de empleados obtenida correctamente");
                  		
-                	 }
+                 		 return response;
+                	 } catch (Exception e) {
+             			response.setMensajeSalida(e.getMessage());
+            			return response;
+            		}
         }
      
     }
