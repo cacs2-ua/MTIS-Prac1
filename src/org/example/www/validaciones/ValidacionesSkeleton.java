@@ -10,7 +10,8 @@
      *  ValidacionesSkeleton java skeleton for the axisService
      */
     
-    import utils.*;
+    import exception.WSKeyNoValidaException;
+import utils.*;
     public class ValidacionesSkeleton{
         
          
@@ -19,14 +20,25 @@
          * 
                                      * @param validarIBAN 
              * @return validarIBANResponse 
+         * @throws WSKeyNoValidaException 
          */
         
     	public org.example.www.validaciones.ValidarIBANResponse validarIBAN(
-    	        org.example.www.validaciones.ValidarIBAN validarIBAN) {
+    	        org.example.www.validaciones.ValidarIBAN validarIBAN) throws WSKeyNoValidaException {
+    	    ValidarIBANResponse response = new ValidarIBANResponse();
+    	    
+    		try {
+        		String WSKey = validarIBAN.getWSKey();
+                
+                Utils.verificarWSKey(WSKey);
+    		} catch (Exception e) {
+    			response.setValido(false);
+    	        response.setMensajeSalida(e.getMessage());
+    	        return response;
+    		}
 
     	    // Se obtiene el IBAN desde el objeto de entrada.
     	    String iban = validarIBAN.getIBAN();
-    	    org.example.www.validaciones.ValidarIBANResponse response = new org.example.www.validaciones.ValidarIBANResponse();
 
     	    // Comprobamos que el IBAN no sea nulo y eliminamos posibles espacios en blanco.
     	    if (iban == null) {
@@ -89,17 +101,26 @@
          * 
                                      * @param validarNAF 
              * @return validarNAFResponse 
+         * @throws WSKeyNoValidaException 
          */
         
                  public org.example.www.validaciones.ValidarNAFResponse validarNAF(
-                	        org.example.www.validaciones.ValidarNAF validarNAF) {
+                	        org.example.www.validaciones.ValidarNAF validarNAF) throws WSKeyNoValidaException {
+	             	    // Creamos el objeto respuesta
+	             	    ValidarNAFResponse response = new ValidarNAFResponse();
+	             		try {
+	                		String WSKey = validarNAF.getWSKey();
+	                        
+	                        Utils.verificarWSKey(WSKey);
+	            		} catch (Exception e) {
+	            			response.setValido(false);
+	            	        response.setMensajeSalida(e.getMessage());
+	            	        return response;
+	            		}
 
                 	    // Obtenemos el NAF a validar
                 	    String naf = validarNAF.getNAF();
                 	    
-                	    // Creamos el objeto respuesta
-                	    ValidarNAFResponse response = new ValidarNAFResponse();
-
                 	    // Comprobamos que el NAF no sea nulo y cumpla el formato de 12 dígitos
                 	    if (naf == null || !naf.matches("^[0-9]{12}$")) {
                 	        response.setValido(false);
@@ -141,13 +162,25 @@
          * 
                                      * @param validarNIF 
              * @return validarNIFResponse 
+         * @throws WSKeyNoValidaException 
          */
         
                  public org.example.www.validaciones.ValidarNIFResponse validarNIF(
-                	        org.example.www.validaciones.ValidarNIF validarNIF) {
+                	        org.example.www.validaciones.ValidarNIF validarNIF) throws WSKeyNoValidaException {
+                	 
+                	 	ValidarNIFResponse response = new ValidarNIFResponse();
+	             		try {
+	                		String WSKey = validarNIF.getWSKey();
+	                        
+	                        Utils.verificarWSKey(WSKey);
+	            		} catch (Exception e) {
+	            			response.setValido(false);
+	            	        response.setMensajeSalida(e.getMessage());
+	            	        return response;
+	            		}
 
                 	    String nif = validarNIF.getNIF();
-                	    ValidarNIFResponse response = new ValidarNIFResponse();
+                	    
 
                 	    // Primero comprobamos que el NIF no sea nulo y cumpla el formato: 8 dígitos seguidos de una letra.
                 	    if (nif == null || !nif.matches("^[0-9]{8}[A-Za-z]$")) {
@@ -186,14 +219,23 @@
          * 
                                      * @param validarNIE 
              * @return validarNIEResponse 
+         * @throws WSKeyNoValidaException 
          */
         
                  public org.example.www.validaciones.ValidarNIEResponse validarNIE(
-                	        org.example.www.validaciones.ValidarNIE validarNIE) {
-
+                	        org.example.www.validaciones.ValidarNIE validarNIE) throws WSKeyNoValidaException {
+                	 	ValidarNIEResponse response = new ValidarNIEResponse();
+	             		try {
+	                		String WSKey = validarNIE.getWSKey();
+	                        
+	                        Utils.verificarWSKey(WSKey);
+	            		} catch (Exception e) {
+	            			response.setValido(false);
+	            	        response.setMensajeSalida(e.getMessage());
+	            	        return response;
+	            		}
+	                    
                 	    String nie = validarNIE.getNIE();
-                	    // Creamos la respuesta
-                	    ValidarNIEResponse response = new ValidarNIEResponse();
 
                 	    // Comprobar que el NIE no sea nulo y cumpla con el formato: [XYZ] seguido de 7 dígitos y una letra final.
                 	    if (nie == null || !nie.matches("^[XYZxyz][0-9]{7}[A-Za-z]$")) {

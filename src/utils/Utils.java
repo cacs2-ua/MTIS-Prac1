@@ -6,6 +6,8 @@ import org.example.www.validaciones.*;
 
 public final class Utils {
 	
+	private static final Conexion conexion = new Conexion();
+
     private static final ValidacionesSkeleton validaciones = new ValidacionesSkeleton();
 	
     private Utils() {
@@ -13,19 +15,18 @@ public final class Utils {
     }
     
     public static void verificarWSKey(String WSKey) throws WSKeyNoValidaException {
-        Conexion cn = new Conexion();
-        
-        String WSKeyDB = cn.obtenerWSKey();
+        String WSKeyDB = conexion.obtenerWSKey();
         
 		if (!WSKeyDB.equals(WSKey)){
-			throw new WSKeyNoValidaException("ERROR: Acceso no autorizado: WSKey no válida.");
+			throw new WSKeyNoValidaException("ERROR: Operacion no autorizada. ");
 		}
 		
     }
     
-    public static boolean validarNIF (String NIF) {
+    public static boolean validarNIF (String NIF) throws WSKeyNoValidaException {
     	ValidarNIF validarNIFRequest = new ValidarNIF();
         validarNIFRequest.setNIF(NIF);
+        validarNIFRequest.setWSKey(conexion.obtenerWSKey());
         
         ValidarNIFResponse response = validaciones.validarNIF(validarNIFRequest);
         
@@ -33,9 +34,11 @@ public final class Utils {
     	
     }
     
-    public static boolean validarNIE (String NIE) {
+    public static boolean validarNIE (String NIE) throws WSKeyNoValidaException {
     	ValidarNIE validarNIERequest = new ValidarNIE();
         validarNIERequest.setNIE(NIE);
+        validarNIERequest.setNIE(NIE);
+        validarNIERequest.setWSKey(conexion.obtenerWSKey());
         
         ValidarNIEResponse response = validaciones.validarNIE(validarNIERequest);
         
@@ -43,15 +46,17 @@ public final class Utils {
     	
     }
     
-    public static void validarNIFNIE (String nifnie) {
+    public static void validarNIFNIE (String nifnie) throws WSKeyNoValidaException {
     	if (!validarNIF(nifnie) && !validarNIE(nifnie)) {
     		throw new InvalidNIFNIEException("ERROR: el nif/nie introducido no es válido. ");
     	}
     }
     
-    public static boolean validarNAF (String NAF) {
+    public static boolean validarNAF (String NAF) throws WSKeyNoValidaException {
     	ValidarNAF validarNAFRequest = new ValidarNAF();
         validarNAFRequest.setNAF(NAF);
+        validarNAFRequest.setNAF(NAF);
+        validarNAFRequest.setWSKey(conexion.obtenerWSKey());
         
         ValidarNAFResponse response = validaciones.validarNAF(validarNAFRequest);
         
@@ -59,9 +64,11 @@ public final class Utils {
     	
     }
     
-    public static boolean validarIBAN (String IBAN) {
+    public static boolean validarIBAN (String IBAN) throws WSKeyNoValidaException {
     	ValidarIBAN validarIBANRequest = new ValidarIBAN();
         validarIBANRequest.setIBAN(IBAN);
+        validarIBANRequest.setIBAN(IBAN);
+        validarIBANRequest.setWSKey(conexion.obtenerWSKey());
         
         ValidarIBANResponse response = validaciones.validarIBAN(validarIBANRequest);
         
@@ -88,7 +95,7 @@ public final class Utils {
     
     public static void validarEmpleado (String nifnie,
     											String NAF,
-    											String IBAN) {
+    											String IBAN) throws WSKeyNoValidaException {
     	
     	if (!esFormatoNIF(nifnie) && !esFormatoNIE(nifnie)) {
     		throw new InvalidNIFNIEException("ERROR: el nif/nie introducido no es válido. ");

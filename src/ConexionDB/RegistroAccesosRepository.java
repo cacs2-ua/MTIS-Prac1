@@ -37,7 +37,7 @@ public class RegistroAccesosRepository {
                 return rs.getInt("id");
             } else {
             	throw new SQLException("ERROR: El empleado con NIF/NIE: " + nifnie + 
-						"no existe en la BD");
+						" no existe en la BD");
             }
             
         } catch (SQLException e) {
@@ -72,13 +72,12 @@ public class RegistroAccesosRepository {
                 return rs.getInt("id");
             } else {
             	throw new SQLException("ERROR: La sala con codigo: " + codigoSala + 
-						"no existe en la BD");
+						" no existe en la BD");
             }
             
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("ERROR: La sala con codigo: " + codigoSala + 
-            						"no existe en la BD");
+            throw new SQLException(e.getMessage());
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -108,13 +107,13 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-                return -1;
+            	throw new SQLException("ERROR: el dispositivo con codigo: " + codigo + 
+						" no existe en la BD");
             }
             
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("ERROR: El dispositivo con codigo: " + codigo + 
-            						"no existe en la BD");
+            throw new SQLException(e.getMessage());
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }

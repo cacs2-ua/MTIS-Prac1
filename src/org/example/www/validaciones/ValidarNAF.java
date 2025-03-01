@@ -55,6 +55,36 @@
                                }
                             
 
+                        /**
+                        * field for WSKey
+                        */
+
+                        
+                                    protected java.lang.String localWSKey ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getWSKey(){
+                               return localWSKey;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param WSKey
+                               */
+                               public void setWSKey(java.lang.String param){
+                            
+                                            this.localWSKey=param;
+                                       
+
+                               }
+                            
+
      
      
         /**
@@ -127,6 +157,24 @@
 
                                         
                                                    xmlWriter.writeCharacters(localNAF);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "WSKey", xmlWriter);
+                             
+
+                                          if (localWSKey==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("WSKey cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localWSKey);
                                             
                                           }
                                     
@@ -326,6 +374,15 @@
                                            throw new org.apache.axis2.databinding.ADBException("NAF cannot be null!!");
                                         }
                                     
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "WSKey"));
+                                 
+                                        if (localWSKey != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localWSKey));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("WSKey cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -415,6 +472,31 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setNAF(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","WSKey").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"WSKey" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setWSKey(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
