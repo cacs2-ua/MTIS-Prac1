@@ -60,8 +60,8 @@
     
       <xsd:complexType name="ControlPresenciaOperationType">
       	<xsd:sequence>
-      		<xsd:element name="nif" type="xsd:string"></xsd:element>
-      		<xsd:element name="codigoSala" type="xsd:string"></xsd:element>
+      		<xsd:element name="nifnie" type="xsd:string"></xsd:element>
+      		<xsd:element name="codigoSala" type="xsd:int"></xsd:element>
       	</xsd:sequence>
       </xsd:complexType>
     

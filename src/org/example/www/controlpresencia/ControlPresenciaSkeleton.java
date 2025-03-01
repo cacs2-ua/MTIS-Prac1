@@ -6,10 +6,24 @@
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST)
  */
     package org.example.www.controlpresencia;
+    
+    import java.sql.SQLException;
+    import java.sql.Timestamp;
+    import java.util.List;
+    import ConexionDB.Conexion;
+    import ConexionDB.ControlPresenciaRepository;
+    import exception.WSKeyNoValidaException;
+    import utils.*;
+    
     /**
      *  ControlPresenciaSkeleton java skeleton for the axisService
      */
     public class ControlPresenciaSkeleton{
+    	private ControlPresenciaRepository controlPresenciaRepository;
+    	
+    	public ControlPresenciaSkeleton() {
+    		this.controlPresenciaRepository = new ControlPresenciaRepository();
+    	}
         
          
         /**
@@ -24,8 +38,26 @@
                   org.example.www.controlpresencia.Registrar registrar
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#registrar");
+                	 RegistrarResponse response = new RegistrarResponse();
+                	 
+                	 try {
+                		 String WSKey = registrar.getWSKey();
+                		 
+                		 Utils.verificarWSKey(WSKey);
+                		 
+                		 String nifNie = registrar.getIn().getNifnie();
+                		 
+                		 Utils.validarNIFNIE(nifNie);
+                		 
+                		 this.controlPresenciaRepository.registrarControlPresencia(registrar.getIn());
+                		 response.setMensajeSalida("ControlPresencia Registrado Correctamente");
+                		 
+                		 return response;
+                		 
+                	 } catch (Exception e) {
+              			response.setMensajeSalida(e.getMessage());
+            			return response;
+            		}
         }
      
          

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.example.www.controlaccesos.InstanciaRegistroAccesosType;
 
@@ -36,7 +37,7 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-            	throw new SQLException("ERROR: El empleado con NIF/NIE: " + nifnie + 
+            	throw new NoSuchElementException("ERROR: El empleado con NIF/NIE: " + nifnie + 
 						" no existe en la BD");
             }
             
@@ -71,7 +72,7 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-            	throw new SQLException("ERROR: La sala con codigo: " + codigoSala + 
+            	throw new NoSuchElementException("ERROR: La sala con codigo: " + codigoSala + 
 						" no existe en la BD");
             }
             
@@ -107,7 +108,7 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-            	throw new SQLException("ERROR: el dispositivo con codigo: " + codigo + 
+            	throw new NoSuchElementException("ERROR: el dispositivo con codigo: " + codigo + 
 						" no existe en la BD");
             }
             
@@ -192,7 +193,7 @@ public class RegistroAccesosRepository {
 
             rs = stmt.executeQuery();
             if (!rs.next()) {
-                throw new SQLException("ERROR: No existen registros de acceso "
+                throw new SQLException("ADVERTENCIA: No existen registros de acceso "
                 						+ "con las caracteristicas especificadas. ");
             }
 

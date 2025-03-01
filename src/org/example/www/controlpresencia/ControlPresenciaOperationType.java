@@ -25,30 +25,30 @@
             
 
                         /**
-                        * field for Nif
+                        * field for Nifnie
                         */
 
                         
-                                    protected java.lang.String localNif ;
+                                    protected java.lang.String localNifnie ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getNif(){
-                               return localNif;
+                           public  java.lang.String getNifnie(){
+                               return localNifnie;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Nif
+                               * @param param Nifnie
                                */
-                               public void setNif(java.lang.String param){
+                               public void setNifnie(java.lang.String param){
                             
-                                            this.localNif=param;
+                                            this.localNifnie=param;
                                        
 
                                }
@@ -59,14 +59,14 @@
                         */
 
                         
-                                    protected java.lang.String localCodigoSala ;
+                                    protected int localCodigoSala ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getCodigoSala(){
+                           public  int getCodigoSala(){
                                return localCodigoSala;
                            }
 
@@ -76,7 +76,7 @@
                                * Auto generated setter method
                                * @param param CodigoSala
                                */
-                               public void setCodigoSala(java.lang.String param){
+                               public void setCodigoSala(int param){
                             
                                             this.localCodigoSala=param;
                                        
@@ -144,18 +144,18 @@
                    }
                
                                     namespace = "";
-                                    writeStartElement(null, namespace, "nif", xmlWriter);
+                                    writeStartElement(null, namespace, "nifnie", xmlWriter);
                              
 
-                                          if (localNif==null){
+                                          if (localNifnie==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("nif cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("nifnie cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localNif);
+                                                   xmlWriter.writeCharacters(localNifnie);
                                             
                                           }
                                     
@@ -164,18 +164,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "codigoSala", xmlWriter);
                              
-
-                                          if (localCodigoSala==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCodigoSala);
-                                            
-                                          }
+                                               if (localCodigoSala==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -365,23 +360,20 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "nif"));
+                                                                      "nifnie"));
                                  
-                                        if (localNif != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNif));
+                                        if (localNifnie != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNifnie));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("nif cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("nifnie cannot be null!!");
                                         }
                                     
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "codigoSala"));
                                  
-                                        if (localCodigoSala != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("codigoSala cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCodigoSala));
+                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -460,17 +452,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","nif").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","nifnie").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"nif" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"nifnie" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setNif(
+                                              object.setNifnie(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
@@ -496,7 +488,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setCodigoSala(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     

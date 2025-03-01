@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import exception.*;
 import org.example.www.validaciones.*;
 import org.example.www.controlaccesos.InstanciaRegistroAccesosType;
@@ -60,7 +62,7 @@ public class EmpleadoRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("ERROR: El empleado que se ha tratado de insertar ya existía en la BD");
+            throw new SQLException(e.getMessage());
         } finally {
             // Cerrar recursos en el finally
             if (stmt != null) {
@@ -86,7 +88,7 @@ public class EmpleadoRepository {
             int filasAfectadas = stmt.executeUpdate();
             
             if (filasAfectadas == 0) {
-            	throw new SQLException("ERROR: No existe ningún empleado en la BD con nifnie: " + nifnie);
+            	throw new NoSuchElementException("ADVERTENCIA: No existe ningún empleado en la BD con nifnie: " + nifnie);
             }
         }
         
@@ -149,7 +151,7 @@ public class EmpleadoRepository {
             int filasAfectadas = stmt.executeUpdate();
             
             if (filasAfectadas == 0) {
-            	throw new SQLException("ERROR: No existe ningún empleado en la BD con id: " + id);
+            	throw new NoSuchElementException("ADVERTENCIA: No existe ningún empleado en la BD con id: " + id);
             }
             
         }  catch (SQLException e) {
@@ -179,7 +181,7 @@ public class EmpleadoRepository {
         	
         	rs = stmt.executeQuery();
             if (!rs.next()) {
-                throw new SQLException("ADVERTENCIA: No existe ningún empleado con NIF/NIE: " + nifnie);
+                throw new NoSuchElementException("ADVERTENCIA: No existe ningún empleado con NIF/NIE: " + nifnie);
             }
             EmpleadosType empleado =  new EmpleadosType();
             
