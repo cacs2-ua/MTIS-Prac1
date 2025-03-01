@@ -22,7 +22,7 @@ public class EmpleadoRepository {
 	public EmpleadoRepository() {
 		this.conexion = new Conexion();
 		this.validaciones = new ValidacionesSkeleton();
-	}
+	} 
 	
     public void insertarEmpleado(
             String nifnie,
