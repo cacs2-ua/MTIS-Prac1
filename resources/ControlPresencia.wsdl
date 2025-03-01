@@ -69,11 +69,11 @@
       		<xsd:element name="email" type="xsd:string"/>
       		<xsd:element name="naf" type="xsd:string"/>
       		<xsd:element name="iban" type="xsd:string"/>
-      		<xsd:element name="idNivel" type="xsd:string"/>
+      		<xsd:element name="idNivel" type="xsd:int"/>
       		<xsd:element name="usuario" type="xsd:string"/>
       		<xsd:element name="password" type="xsd:string"/>
-      		<xsd:element name="valido" type="xsd:string"/>
-      		<xsd:element name="id" type="xsd:string"/>
+      		<xsd:element name="valido" type="xsd:int"/>
+      		<xsd:element name="id" type="xsd:int"/>
       	</xsd:sequence>
       </xsd:complexType>
     </xsd:schema>

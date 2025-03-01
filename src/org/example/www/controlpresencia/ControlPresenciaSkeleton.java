@@ -107,8 +107,18 @@
                   org.example.www.controlpresencia.ControlEmpleadoSala controlEmpleadoSala
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#controlEmpleadoSala");
+                	 ControlEmpleadoSalaResponse response = new ControlEmpleadoSalaResponse();
+                	 
+                	 try {
+                		 String WSKey = controlEmpleadoSala.getWSKey();
+                 		
+                 		 Utils.verificarWSKey(WSKey);
+                 		 
+                 		 int codigoSala = controlEmpleadoSala.getCodigoSala();
+                 		 
+                 		List<EmpleadosType> registros = this.controlPresenciaRepository()
+                 		
+                	 }
         }
      
     }

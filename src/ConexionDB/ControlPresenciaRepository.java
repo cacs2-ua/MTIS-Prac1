@@ -171,7 +171,7 @@ public class ControlPresenciaRepository {
     	
     }
     
-    public EmpleadosType controlEmpleadosSala(int codigoSala) {
+    public List<EmpleadosType> controlEmpleadosSala(int codigoSala) throws SQLException {
         List<EmpleadosType> registros = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;
@@ -196,16 +196,29 @@ public class ControlPresenciaRepository {
             }
             
             while (rs.next()) {
-            	EmpleadosType registro = new InstanciaRegistroAccesosType();
-                registro.setId(param);(rs.getInt("id"));
-
-                
-                Calendar fechaHora = Calendar.getInstance();
-                fechaHora.setTimeInMillis(rs.getTimestamp("fechaHora").getTime());
-                registro.setFechaHora(fechaHora);
+            	EmpleadosType registro = new EmpleadosType();
+                registro.setId(rs.getInt("id"));
+                registro.setNifnie(rs.getString("nifnie"));
+                registro.setNombreApellidos(rs.getString("nombreApellidos"));
+                registro.setEmail(rs.getString("email"));
+                registro.setNaf(rs.getString("naf"));
+                registro.setIban(rs.getString("iban"));
+                registro.setIdNivel(rs.getInt("idNivel"));
+                registro.setUsuario(rs.getString("usuario"));
+                registro.setPassword(rs.getString("password"));
+                registro.setValido(rs.getInt("valido"));
 
                 registros.add(registro);
             }
+            return registros;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException(e.getMessage());
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (con != null) con.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
     }
     

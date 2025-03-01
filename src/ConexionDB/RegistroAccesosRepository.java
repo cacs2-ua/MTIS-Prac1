@@ -210,6 +210,8 @@ public class RegistroAccesosRepository {
 
                 registros.add(registro);
             }
+            
+            return registros;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,6 +222,6 @@ public class RegistroAccesosRepository {
             try { if (con != null) con.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
 
-        return registros;
+        
     }
 }

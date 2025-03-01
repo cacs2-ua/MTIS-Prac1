@@ -179,14 +179,14 @@
                         */
 
                         
-                                    protected java.lang.String localIdNivel ;
+                                    protected int localIdNivel ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getIdNivel(){
+                           public  int getIdNivel(){
                                return localIdNivel;
                            }
 
@@ -196,7 +196,7 @@
                                * Auto generated setter method
                                * @param param IdNivel
                                */
-                               public void setIdNivel(java.lang.String param){
+                               public void setIdNivel(int param){
                             
                                             this.localIdNivel=param;
                                        
@@ -269,14 +269,14 @@
                         */
 
                         
-                                    protected java.lang.String localValido ;
+                                    protected int localValido ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getValido(){
+                           public  int getValido(){
                                return localValido;
                            }
 
@@ -286,7 +286,7 @@
                                * Auto generated setter method
                                * @param param Valido
                                */
-                               public void setValido(java.lang.String param){
+                               public void setValido(int param){
                             
                                             this.localValido=param;
                                        
@@ -299,14 +299,14 @@
                         */
 
                         
-                                    protected java.lang.String localId ;
+                                    protected int localId ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getId(){
+                           public  int getId(){
                                return localId;
                            }
 
@@ -316,7 +316,7 @@
                                * Auto generated setter method
                                * @param param Id
                                */
-                               public void setId(java.lang.String param){
+                               public void setId(int param){
                             
                                             this.localId=param;
                                        
@@ -476,18 +476,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "idNivel", xmlWriter);
                              
-
-                                          if (localIdNivel==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("idNivel cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localIdNivel);
-                                            
-                                          }
+                                               if (localIdNivel==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("idNivel cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdNivel));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -530,36 +525,26 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "valido", xmlWriter);
                              
-
-                                          if (localValido==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("valido cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localValido);
-                                            
-                                          }
+                                               if (localValido==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("valido cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localValido));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
                                     namespace = "";
                                     writeStartElement(null, namespace, "id", xmlWriter);
                              
-
-                                          if (localId==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("id cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localId);
-                                            
-                                          }
+                                               if (localId==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("id cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localId));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -796,12 +781,9 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "idNivel"));
                                  
-                                        if (localIdNivel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdNivel));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("idNivel cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIdNivel));
+                            
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "usuario"));
                                  
@@ -823,21 +805,15 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "valido"));
                                  
-                                        if (localValido != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localValido));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("valido cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localValido));
+                            
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "id"));
                                  
-                                        if (localId != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localId));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("id cannot be null!!");
-                                        }
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localId));
+                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1052,7 +1028,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setIdNivel(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -1127,7 +1103,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setValido(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -1152,7 +1128,7 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setId(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
