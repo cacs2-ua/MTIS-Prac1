@@ -104,7 +104,7 @@ public class EmpleadoRepository {
         
 	}
 	
-	public void modificarEmpleado(EmpleadosType empleado) {
+	public void modificarEmpleado(EmpleadosType empleado) throws SQLException {
 		Connection con = null;
         PreparedStatement stmt = null;
         
@@ -122,7 +122,7 @@ public class EmpleadoRepository {
             int valido = empleado.getValido();
             int id = empleado.getId();
             
-            String sql = "UDPATE empleados"
+            String sql = "UPDATE empleados "
             			+ "SET nifnie  = ?, "
             			+ "nombreapellidos = ?, "
             			+ "email = ?, "
@@ -131,7 +131,7 @@ public class EmpleadoRepository {
             			+ "idNivel = ?, "
             			+ "usuario = ?, "
             			+ "password = ?, "
-            			+ "valido = ?, "
+            			+ "valido = ? "
             			+ "WHERE id = ?;";
             
             stmt = con.prepareStatement(sql);
@@ -144,7 +144,25 @@ public class EmpleadoRepository {
             stmt.setString(7, usuario);
             stmt.setString(8, password);
             stmt.setInt(9, valido);
+            stmt.setInt(10, id);
             
+            int filasAfectadas = stmt.executeUpdate();
+            
+            if (filasAfectadas == 0) {
+            	throw new SQLException("ERROR: No existe ningún empleado en la BD con id: " + id);
+            }
+            
+        }  catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException(e.getMessage());
+        }  finally {
+            // Cerrar recursos en el finally
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
         }
 	}
 	

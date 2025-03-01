@@ -36,8 +36,27 @@ import utils.*;
                   org.example.www.empleados.Modificar modificar
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#modificar");
+                	 ModificarResponse response = new ModificarResponse();
+                	 
+                	 try {
+                		 String WSKey = modificar.getIn().getWSKey();
+                         
+                         Utils.verificarWSKey(WSKey);
+                         
+                         String nifnie = modificar.getIn().getNifnie();
+                         String naf = modificar.getIn().getNaf();
+                         String iban = modificar.getIn().getIban();
+                         
+                         Utils.validarEmpleado(nifnie, naf, iban);
+                         
+                         this.empleadoRepository.modificarEmpleado(modificar.getIn());
+                         
+                         response.setMensajeSalida("Empleado con nif: " + nifnie + " modificado correctamente. ");
+                         return response;
+                	 } catch (Exception e) {
+              			response.setMensajeSalida(e.getMessage());
+             			return response;
+             		}
             }
      
          
