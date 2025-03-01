@@ -104,4 +104,52 @@ public class EmpleadoRepository {
         
 	}
 	
+	public void modificarEmpleado(EmpleadosType empleado) {
+		Connection con = null;
+        PreparedStatement stmt = null;
+        
+        try {
+        	con = this.conexion.conectar();
+        	
+        	String nifnie = empleado.getNifnie();
+        	String nombreApellidos = empleado.getNombreApellidos();
+            String email = empleado.getEmail();
+            String naf = empleado.getNaf();
+            String iban = empleado.getIban();
+            int idNivel = empleado.getIdNivel();
+            String usuario = empleado.getUsuario();
+            String password = empleado.getPassword();
+            int valido = empleado.getValido();
+            int id = empleado.getId();
+            
+            String sql = "UDPATE empleados"
+            			+ "SET nifnie  = ?, "
+            			+ "nombreapellidos = ?, "
+            			+ "email = ?, "
+            			+ "naf= ?, "
+            			+ "iban = ?, "
+            			+ "idNivel = ?, "
+            			+ "usuario = ?, "
+            			+ "password = ?, "
+            			+ "valido = ?, "
+            			+ "WHERE id = ?;";
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nifnie);
+            stmt.setString(2, nombreApellidos);
+            stmt.setString(3, email);
+            stmt.setString(4, naf);
+            stmt.setString(5, iban);
+            stmt.setInt(6, idNivel);
+            stmt.setString(7, usuario);
+            stmt.setString(8, password);
+            stmt.setInt(9, valido);
+            
+        }
+	}
+	
+	
+	
+	
+	
 }

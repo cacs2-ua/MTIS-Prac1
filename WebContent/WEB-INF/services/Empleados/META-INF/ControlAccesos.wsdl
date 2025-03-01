@@ -12,7 +12,7 @@
       <xsd:element name="registrarResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="out" type="xsd:string"/>
+            <xsd:element name="mensajeSalida" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -28,7 +28,7 @@
           <xsd:sequence>
           	<xsd:element maxOccurs="unbounded" minOccurs="0" name="out" type="tns:InstanciaRegistroAccesosType"/>
 
-          	<xsd:element maxOccurs="1" minOccurs="0" name="mensaje" type="xsd:string"/>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="mensajeSalida" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>

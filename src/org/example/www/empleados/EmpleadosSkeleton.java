@@ -141,7 +141,7 @@ import utils.*;
                  		
                  		empleadoRepository.borrarEmpleado(nifnie);
                  		
-                 		response.setMensajeSalida("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito. ");
+                 		response.setMensajeSalida("El empleado con nifnie: " + nifnie + " ha sido borrado con exito. ");
             
                  		return response;
                 		

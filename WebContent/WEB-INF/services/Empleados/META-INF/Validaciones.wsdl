@@ -5,14 +5,16 @@
       <xsd:element name="validarNIF">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="NIF" type="xsd:string"/>
+          	<xsd:element name="NIF" type="xsd:string"/>
+          	<xsd:element name="WSKey" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="validarNIFResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="valido" type="xsd:boolean"/>
+          	<xsd:element name="valido" type="xsd:boolean"/>
+          	<xsd:element name="mensajeSalida" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -21,6 +23,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="NIE" type="xsd:string"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -29,6 +32,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"/>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -37,6 +41,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="NAF" type="xsd:string"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -45,6 +50,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"/>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -53,6 +59,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="IBAN" type="xsd:string"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -61,6 +68,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"/>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
