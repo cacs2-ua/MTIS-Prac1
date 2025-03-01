@@ -127,7 +127,7 @@ public class RegistroAccesosRepository {
         }
     }
     
-    public boolean insertarRegistroAcceso(
+    public void insertarRegistroAcceso(
     		String nifnie,
     		int codigoSala,
     		int codigoDispositivo
@@ -153,8 +153,6 @@ public class RegistroAccesosRepository {
             stmt.setTimestamp(4, fechaHora);
             
             int filasAfectadas = stmt.executeUpdate();
-            
-            return (filasAfectadas > 0);
 
         } catch (SQLException e) {
             e.printStackTrace();

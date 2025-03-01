@@ -92,7 +92,7 @@ import utils.*;
                      org.example.www.empleados.NuevoResponse response = new org.example.www.empleados.NuevoResponse();
                      
 
-                     boolean exito = this.empleadoRepository.insertarEmpleado(
+                     this.empleadoRepository.insertarEmpleado(
                          nifnie,
                          nombreApellidos,
                          email,
@@ -104,14 +104,8 @@ import utils.*;
                          valido
                      );
                      
-                     if (exito == true) {
-                         response.setOut("Empleado Insertado Correctamente");
-                     }
+                     response.setOut("Empleado Insertado Correctamente");
                      
-                     else  {
-                    	 response.setOut("Ha ocurrido algún error a la hora de insertar el empleado");
-                     }
-
                      return response;
                 	 
         }
@@ -143,17 +137,10 @@ import utils.*;
              		
              		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
              		
-             		boolean exito = empleadoRepository.borrarEmpleado(nifnie);
+             		empleadoRepository.borrarEmpleado(nifnie);
              		
-             		if (exito == true) {
-             			response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
+             		response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
         
-             		}
-             		
-             		else {
-             			response.setOut("Ha ocurrido algún error al borrar el empleado con nifnie: " + nifnie);
-             		}
-             		
              		return response;
         }
      

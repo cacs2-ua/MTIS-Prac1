@@ -92,19 +92,13 @@ import utils.*;
                      
                      RegistrarResponse response = new RegistrarResponse();
                      
-                     boolean exito = this.registroAccesosRepository.insertarRegistroAcceso(
+                     this.registroAccesosRepository.insertarRegistroAcceso(
                     		 nifNie, 
                     		 codigoSala, 
                     		 codigoDispositivo
                     		 );
-                     if (exito == true) {
-                         response.setOut("RegistroAcceso Insertado Correctamente");
-                     }
+                     response.setOut("RegistroAcceso Insertado Correctamente");
                      
-                     else  {
-                    	 response.setOut("Ha ocurrido algún error a la hora de insertar el RegistroAcceso");
-                     }
-
                      return response;
         }
     }

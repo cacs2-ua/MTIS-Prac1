@@ -24,7 +24,7 @@ public class EmpleadoRepository {
 		this.validaciones = new ValidacionesSkeleton();
 	}
 	
-    public boolean insertarEmpleado(
+    public void insertarEmpleado(
             String nifnie,
             String nombreApellidos,
             String email,
@@ -58,9 +58,6 @@ public class EmpleadoRepository {
             // 4. Ejecutar la inserción
             int filasAfectadas = stmt.executeUpdate();
 
-            // 5. Devolver true si se insertó al menos 1 fila
-            return (filasAfectadas > 0);
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("ERROR: El empleado que se ha tratado de insertar ya existía en la BD");
@@ -75,7 +72,7 @@ public class EmpleadoRepository {
         }
     }
 	
-	public boolean borrarEmpleado (String nifnie) throws SQLException {
+	public void borrarEmpleado (String nifnie) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         
@@ -88,13 +85,14 @@ public class EmpleadoRepository {
             
             int filasAfectadas = stmt.executeUpdate();
             
-            return (filasAfectadas > 0);
+            if (filasAfectadas == 0) {
+            	throw new SQLException("ERROR: No existe ningún empleado en la BD con nifnie: " + nifnie);
+            }
         }
         
         catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("ERROR: El empleado que se ha tratado "
-            		+ "de borrar no existe en la BD");
+            throw new SQLException(e.getMessage());
         } finally {
             if (stmt != null) {
                 try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -106,14 +104,4 @@ public class EmpleadoRepository {
         
 	}
 	
-	/*
-	
-	public void modificarEmpleado (EmpleadosType datosEmpleado) {
-		String nifnie = datosEmpleado.getNifnie();
-		if (!validarNIF(nifnie))
-		
-	}
-	
-	*/
-
 }
