@@ -38,7 +38,7 @@ public class ControlAccesosSkeleton{
 		
         ConsultarResponse response = new ConsultarResponse();
 		try {
-    		String WSKey = consultar.getIn().getWSKey();
+    		String WSKey = consultar.getWSKey();
     		
     		Utils.verificarWSKey(WSKey);
     		
@@ -82,7 +82,7 @@ public class ControlAccesosSkeleton{
      {
          RegistrarResponse response = new RegistrarResponse();
     	 try {
-     		 String WSKey = registrar.getIn().getWSKey();
+     		 String WSKey = registrar.getWSKey();
      		 
      		 Utils.verificarWSKey(WSKey);
      		 

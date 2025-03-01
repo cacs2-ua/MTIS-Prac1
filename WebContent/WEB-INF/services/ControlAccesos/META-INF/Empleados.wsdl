@@ -5,7 +5,8 @@
       <xsd:element name="nuevo">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="in" type="tns:EmpleadosType"/>
+          	<xsd:element name="in" type="tns:EmpleadosType"/>
+          	<xsd:element name="WSKey" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -38,6 +39,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="in" type="tns:EmpleadosType"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -54,7 +56,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="nifnie" type="xsd:string"/>
-      			<xsd:element name="WSKey" type="xsd:string"/>
+      			<xsd:element maxOccurs="1" minOccurs="1" name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -62,7 +64,9 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="mensajeSalida" type="tns:EmpleadosType"/>
+      			<xsd:element maxOccurs="1" minOccurs="0" name="empleadoOut" type="tns:EmpleadosType">
+      			</xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -79,7 +83,7 @@
       		<xsd:element name="password" type="xsd:string"/>
       		<xsd:element name="valido" type="xsd:int"/>
       		<xsd:element name="id" type="xsd:int"/>
-      		<xsd:element name="WSKey" type="xsd:string"/>
+
       	</xsd:sequence>
       </xsd:complexType>
     

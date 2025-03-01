@@ -39,7 +39,7 @@ import utils.*;
                 	 ModificarResponse response = new ModificarResponse();
                 	 
                 	 try {
-                		 String WSKey = modificar.getIn().getWSKey();
+                		 String WSKey = modificar.getWSKey();
                          
                          Utils.verificarWSKey(WSKey);
                          
@@ -112,7 +112,7 @@ import utils.*;
             {
                      NuevoResponse response = new NuevoResponse();
                 	 try {
-                         String WSKey = nuevo.getIn().getWSKey();
+                         String WSKey = nuevo.getWSKey();
                          
                          Utils.verificarWSKey(WSKey);
                          
