@@ -166,8 +166,43 @@ public class EmpleadoRepository {
         }
 	}
 	
-	
-	
-	
+	public EmpleadosType consultarEmpleado(String nifnie) throws SQLException {
+		Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+        	con = this.conexion.conectar();
+        	String sql = "SELECT * FROM empleados WHERE nifnie = ?";
+        	stmt = con.prepareStatement(sql);
+        	stmt.setString(1, nifnie);
+        	
+        	rs = stmt.executeQuery();
+            if (!rs.next()) {
+                throw new SQLException("ADVERTENCIA: No existe ningún empleado con NIF/NIE: " + nifnie);
+            }
+            EmpleadosType empleado =  new EmpleadosType();
+            
+            empleado.setId(rs.getInt("id"));
+            empleado.setNifnie(rs.getString("nifnie"));
+            empleado.setNombreApellidos(rs.getString("nombreApellidos"));
+            empleado.setEmail(rs.getString("email"));
+            empleado.setNaf(rs.getString("naf"));
+            empleado.setIban(rs.getString("iban"));
+            empleado.setIdNivel(rs.getInt("idNivel"));
+            empleado.setUsuario(rs.getString("usuario"));
+            empleado.setPassword(rs.getString("password"));
+            empleado.setValido(rs.getInt("valido"));
+            
+            return empleado;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException(e.getMessage());
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try { if (con != null) con.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+	}
 	
 }

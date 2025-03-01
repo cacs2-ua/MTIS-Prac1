@@ -193,7 +193,7 @@ public class RegistroAccesosRepository {
             rs = stmt.executeQuery();
             if (!rs.next()) {
                 throw new SQLException("ERROR: No existen registros de acceso "
-                						+ "con las características especificadas. ");
+                						+ "con las caracteristicas especificadas. ");
             }
 
             while (rs.next()) {

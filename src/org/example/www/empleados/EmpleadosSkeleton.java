@@ -72,8 +72,27 @@ import utils.*;
                   org.example.www.empleados.Consultar consultar
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#consultar");
+                	 ConsultarResponse response = new ConsultarResponse();
+                	 
+                	 try {
+                		 String WSKey = consultar.getWSKey();
+                 		
+                 		 Utils.verificarWSKey(WSKey);
+                 		
+                         String nifNie = consultar.getNifnie();
+                         
+                         Utils.validarNIFNIE(nifNie);
+                         
+                         EmpleadosType empleadoObtenido = this.empleadoRepository.consultarEmpleado(nifNie);
+                         
+                         response.setEmpleadoOut(empleadoObtenido);
+                         response.setMensajeSalida("OK: Empleado con NIF/NIE: " + nifNie
+                         		+ "ha sido consultado correctamente. ");
+                         return response;
+                	 } catch (Exception e) {
+             			response.setMensajeSalida(e.getMessage());
+            			return response;
+            		}
         }
      
          

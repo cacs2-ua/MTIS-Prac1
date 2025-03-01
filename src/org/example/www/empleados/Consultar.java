@@ -62,6 +62,17 @@
                         
                                     protected java.lang.String localWSKey ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localWSKeyTracker = false ;
+
+                           public boolean isWSKeySpecified(){
+                               return localWSKeyTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
@@ -78,7 +89,8 @@
                                * @param param WSKey
                                */
                                public void setWSKey(java.lang.String param){
-                            
+                            localWSKeyTracker = param != null;
+                                   
                                             this.localWSKey=param;
                                        
 
@@ -161,7 +173,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                              if (localWSKeyTracker){
                                     namespace = "";
                                     writeStartElement(null, namespace, "WSKey", xmlWriter);
                              
@@ -179,7 +191,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -373,7 +385,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("nifnie cannot be null!!");
                                         }
-                                    
+                                     if (localWSKeyTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "WSKey"));
                                  
@@ -382,7 +394,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("WSKey cannot be null!!");
                                         }
-                                    
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -503,11 +515,10 @@
                                     
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

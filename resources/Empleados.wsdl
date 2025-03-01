@@ -54,7 +54,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="nifnie" type="xsd:string"/>
-      			<xsd:element name="WSKey" type="xsd:string"/>
+      			<xsd:element maxOccurs="1" minOccurs="0" name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -62,7 +62,9 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="mensajeSalida" type="tns:EmpleadosType"/>
+      			<xsd:element maxOccurs="1" minOccurs="0" name="empleadoOut" type="tns:EmpleadosType">
+      			</xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>

@@ -26,18 +26,60 @@
             
 
                         /**
-                        * field for MensajeSalida
+                        * field for EmpleadoOut
                         */
 
                         
-                                    protected org.example.www.empleados.EmpleadosType localMensajeSalida ;
+                                    protected org.example.www.empleados.EmpleadosType localEmpleadoOut ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localEmpleadoOutTracker = false ;
+
+                           public boolean isEmpleadoOutSpecified(){
+                               return localEmpleadoOutTracker;
+                           }
+
+                           
 
                            /**
                            * Auto generated getter method
                            * @return org.example.www.empleados.EmpleadosType
                            */
-                           public  org.example.www.empleados.EmpleadosType getMensajeSalida(){
+                           public  org.example.www.empleados.EmpleadosType getEmpleadoOut(){
+                               return localEmpleadoOut;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param EmpleadoOut
+                               */
+                               public void setEmpleadoOut(org.example.www.empleados.EmpleadosType param){
+                            localEmpleadoOutTracker = param != null;
+                                   
+                                            this.localEmpleadoOut=param;
+                                       
+
+                               }
+                            
+
+                        /**
+                        * field for MensajeSalida
+                        */
+
+                        
+                                    protected java.lang.String localMensajeSalida ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMensajeSalida(){
                                return localMensajeSalida;
                            }
 
@@ -47,7 +89,7 @@
                                * Auto generated setter method
                                * @param param MensajeSalida
                                */
-                               public void setMensajeSalida(org.example.www.empleados.EmpleadosType param){
+                               public void setMensajeSalida(java.lang.String param){
                             
                                             this.localMensajeSalida=param;
                                        
@@ -113,13 +155,31 @@
 
                
                    }
-               
-                                            if (localMensajeSalida==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                if (localEmpleadoOutTracker){
+                                            if (localEmpleadoOut==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("empleadoOut cannot be null!!");
                                             }
-                                           localMensajeSalida.serialize(new javax.xml.namespace.QName("","mensajeSalida"),
+                                           localEmpleadoOut.serialize(new javax.xml.namespace.QName("","empleadoOut"),
                                                xmlWriter);
+                                        }
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "mensajeSalida", xmlWriter);
+                             
+
+                                          if (localMensajeSalida==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                                                  
+                                          }else{
+
                                         
+                                                   xmlWriter.writeCharacters(localMensajeSalida);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
                     xmlWriter.writeEndElement();
                
 
@@ -304,16 +364,25 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (localEmpleadoOutTracker){
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "mensajeSalida"));
+                                                                      "empleadoOut"));
                             
                             
-                                    if (localMensajeSalida==null){
-                                         throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                                    if (localEmpleadoOut==null){
+                                         throw new org.apache.axis2.databinding.ADBException("empleadoOut cannot be null!!");
                                     }
-                                    elementList.add(localMensajeSalida);
-                                
+                                    elementList.add(localEmpleadoOut);
+                                }
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "mensajeSalida"));
+                                 
+                                        if (localMensajeSalida != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensajeSalida));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -392,9 +461,33 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","empleadoOut").equals(reader.getName())){
+                                
+                                                object.setEmpleadoOut(org.example.www.empleados.EmpleadosType.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","mensajeSalida").equals(reader.getName())){
                                 
-                                                object.setMensajeSalida(org.example.www.empleados.EmpleadosType.Factory.parse(reader));
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensajeSalida" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setMensajeSalida(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     
