@@ -88,7 +88,7 @@ public class EmpleadoRepository {
             int filasAfectadas = stmt.executeUpdate();
             
             if (filasAfectadas == 0) {
-            	throw new NoSuchElementException("ADVERTENCIA: No existe ningún empleado en la BD con nifnie: " + nifnie);
+            	throw new NoSuchElementException("ADVERTENCIA: No existe ningun empleado en la BD con nifnie: " + nifnie);
             }
         }
         

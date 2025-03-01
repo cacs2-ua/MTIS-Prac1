@@ -129,5 +129,45 @@ public class ControlPresenciaRepository {
             }
         }
     }
+    
+    public void eliminarControlPresencia(ControlPresenciaOperationType input) throws SQLException {
+    	Connection con = null;
+        PreparedStatement stmt = null;
+        
+        try {
+        	con = this.conexion.conectar();
+        	
+        	String nifnie = input.getNifnie();
+        	int codigoSala = input.getCodigoSala();
+        	
+        	int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
+        	int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
+        	
+        	String sql = "DELETE FROM controlpresencia WHERE "
+        				+ "idEmpleado = ? and "
+        				+ "idSala = ? ";
+        	stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEmpleado); 
+            stmt.setInt(2, idSala); 
+            
+            int filasAfectadas = stmt.executeUpdate();
+            
+            if (filasAfectadas == 0) {
+            	throw new NoSuchElementException("ADVERTENCIA: No existe ningun registro de control de presencia"
+            									+ " que satisfaga las condicions de entrada. ");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException(e.getMessage());
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    	
+    }
 
 }

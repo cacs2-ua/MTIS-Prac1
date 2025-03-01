@@ -73,8 +73,25 @@
                   org.example.www.controlpresencia.Eliminar eliminar
                   )
             {
-                //TODO : fill this with the necessary business logic
-                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#eliminar");
+                	 EliminarResponse response = new EliminarResponse();
+                	 try {
+                		String WSKey = eliminar.getWSKey();
+                      	
+                   		Utils.verificarWSKey(WSKey);
+                   		
+                   		String nifnie = eliminar.getIn().getNifnie();
+                   		
+                   		Utils.validarNIFNIE(nifnie);
+                   		
+                   		this.controlPresenciaRepository.eliminarControlPresencia(eliminar.getIn());
+                   		
+                   		response.setMensajeSalida("Los Controles Presencia han sido eliminados correctamente. ");
+                   		
+                   		return response;
+                	 } catch (Exception e) {
+              			response.setMensajeSalida(e.getMessage());
+             			return response;
+             		}
         }
      
          
