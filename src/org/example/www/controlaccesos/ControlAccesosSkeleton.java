@@ -10,9 +10,6 @@
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
-
-import org.example.www.empleados.NuevoResponse;
-
 import ConexionDB.Conexion;
 import ConexionDB.RegistroAccesosRepository;
 import exception.WSKeyNoValidaException;
@@ -22,48 +19,39 @@ import utils.*;
      *  ControlAccesosSkeleton java skeleton for the axisService
      */
     public class ControlAccesosSkeleton{
+    	private RegistroAccesosRepository registroAccesosRepository;
         
-         
+        public  ControlAccesosSkeleton() {
+        	this.registroAccesosRepository = new RegistroAccesosRepository();
+        }
+    	
         /**
          * Auto generated method signature
          * 
                                      * @param consultar 
              * @return consultarResponse 
+         * @throws SQLException 
          */
-    	
-    	public boolean verificarWSKey(String WSKey) {
-            Conexion cn = new Conexion();
-            
-            String WSKeyDB = cn.obtenerWSKey();
-            
-    		if (WSKeyDB.equals(WSKey)){
-    			return true;
-    		}
-    		
-    		else {
-    			return false;
-    		}
-    		
-    	}
         
     	public org.example.www.controlaccesos.ConsultarResponse consultar(
-                org.example.www.controlaccesos.Consultar consultar) throws WSKeyNoValidaException {
+                org.example.www.controlaccesos.Consultar consultar) throws WSKeyNoValidaException, SQLException {
     		
-            ConsultarResponse response = new ConsultarResponse();
-            
     		String WSKey = consultar.getIn().getWSKey();
     		
     		Utils.verificarWSKey(WSKey);
-
+    		
             String nifNie = consultar.getIn().getNifnie();
+            
+            Utils.validarNIFNIE(nifNie);
+    		
             int codigoSala = consultar.getIn().getCodigoSala();
             int codigoDispositivo = consultar.getIn().getCodigoDispositivo();
             Timestamp fechaDesde = new Timestamp(consultar.getIn().getFechaDesde().getTimeInMillis());
             Timestamp fechaHasta = new Timestamp(consultar.getIn().getFechaHasta().getTimeInMillis());
 
-            RegistroAccesosRepository registroAccesosRepository = new RegistroAccesosRepository();
-
-            List<InstanciaRegistroAccesosType> registros = registroAccesosRepository
+            ConsultarResponse response = new ConsultarResponse();
+            
+            List<InstanciaRegistroAccesosType> registros = this.registroAccesosRepository
                     .consultarRegistrosAcceso(nifNie, codigoSala, codigoDispositivo, fechaDesde, fechaHasta);
 
             if (!registros.isEmpty()) {
@@ -90,19 +78,21 @@ import utils.*;
                   org.example.www.controlaccesos.Registrar registrar
                   ) throws WSKeyNoValidaException, SQLException
             {
-                     RegistrarResponse response = new RegistrarResponse();
-                     
-                     String nifNie = registrar.getIn().getNifnie();
+                	 
+             		 String WSKey = registrar.getIn().getWSKey();
+             		 
+             		 Utils.verificarWSKey(WSKey);
+             		 
+             		 String nifNie = registrar.getIn().getNifnie();
+             		 
+             		 Utils.validarNIFNIE(nifNie);
+             		 
                      int codigoSala = registrar.getIn().getCodigoSala();
                      int codigoDispositivo = registrar.getIn().getCodigoDispositivo();
                      
-             		 String WSKey = registrar.getIn().getWSKey();
-              		
-             		 Utils.verificarWSKey(WSKey);
+                     RegistrarResponse response = new RegistrarResponse();
                      
-                     Conexion conexion = new Conexion();
-                                        
-                     boolean exito = conexion.insertarRegistroAcceso(
+                     boolean exito = this.registroAccesosRepository.insertarRegistroAcceso(
                     		 nifNie, 
                     		 codigoSala, 
                     		 codigoDispositivo

@@ -21,7 +21,7 @@ public class RegistroAccesosRepository {
         this.conexion = new Conexion();
     }
     
-    public int obtenerIdEmpleadoAPartirDeNifNieEmpleado(String nifnie) {
+    public int obtenerIdEmpleadoAPartirDeNifNieEmpleado(String nifnie) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -41,7 +41,8 @@ public class RegistroAccesosRepository {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            throw new SQLException("ERROR: El empleado con NIF/NIE: " + nifnie + 
+            						"no existe en la BD");
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -55,7 +56,7 @@ public class RegistroAccesosRepository {
         }
     }
     
-    public int obtenerIdSalaAPartirDeCodigoSala(int codigoSala) {
+    public int obtenerIdSalaAPartirDeCodigoSala(int codigoSala) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -75,7 +76,8 @@ public class RegistroAccesosRepository {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            throw new SQLException("ERROR: La sala con codigo: " + codigoSala + 
+            						"no existe en la BD");
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -90,7 +92,7 @@ public class RegistroAccesosRepository {
     }
     
     public int obtenerIdDispositivoAPartirDeCodigoDispositivo
-    (int codigo) {
+    (int codigo) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -110,7 +112,8 @@ public class RegistroAccesosRepository {
             
         } catch (SQLException e) {
             e.printStackTrace();
-            return -1;
+            throw new SQLException("ERROR: El dispositivo con codigo: " + codigo + 
+            						"no existe en la BD");
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -124,8 +127,50 @@ public class RegistroAccesosRepository {
         }
     }
     
+    public boolean insertarRegistroAcceso(
+    		String nifnie,
+    		int codigoSala,
+    		int codigoDispositivo
+
+    ) throws SQLException {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+        	con = this.conexion.conectar();
+            
+            int idEmpleado = obtenerIdEmpleadoAPartirDeNifNieEmpleado(nifnie);
+            int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
+            int idDispositivo = obtenerIdDispositivoAPartirDeCodigoDispositivo(codigoDispositivo);
+            Timestamp fechaHora = Timestamp.valueOf(LocalDateTime.now());
+
+            String sql = "INSERT INTO registroaccesos "
+                       + "(idEmpleado, idSala, idDispositivo, fechaHora) "
+                       + "VALUES (?, ?, ?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idEmpleado);
+            stmt.setInt(2, idSala);
+            stmt.setInt(3, idDispositivo);
+            stmt.setTimestamp(4, fechaHora);
+            
+            int filasAfectadas = stmt.executeUpdate();
+            
+            return (filasAfectadas > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException(e.getMessage());
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    }
+    
     public List<InstanciaRegistroAccesosType> consultarRegistrosAcceso(
-            String nifnie, int codigoSala, int codigoDispositivo, Timestamp fechaDesde, Timestamp fechaHasta) {
+            String nifnie, int codigoSala, int codigoDispositivo, Timestamp fechaDesde, Timestamp fechaHasta) throws SQLException {
 
         List<InstanciaRegistroAccesosType> registros = new ArrayList<>();
         Connection con = null;
@@ -165,6 +210,7 @@ public class RegistroAccesosRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new SQLException(e.getMessage());
         } finally {
             try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
             try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }

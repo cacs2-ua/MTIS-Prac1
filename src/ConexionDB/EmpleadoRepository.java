@@ -24,7 +24,58 @@ public class EmpleadoRepository {
 		this.validaciones = new ValidacionesSkeleton();
 	}
 	
-	public boolean borrarEmpleado (String nifnie) {
+    public boolean insertarEmpleado(
+            String nifnie,
+            String nombreApellidos,
+            String email,
+            String naf,
+            String iban,
+            int idNivel,
+            String usuario,
+            String password,
+            int valido
+    ) throws SQLException {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+        	con = this.conexion.conectar();
+
+            String sql = "INSERT INTO empleados "
+                       + "(nifnie, nombreApellidos, email, naf, iban, idNivel, usuario, password, valido) "
+                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, nifnie);
+            stmt.setString(2, nombreApellidos);
+            stmt.setString(3, email);
+            stmt.setString(4, naf);
+            stmt.setString(5, iban);
+            stmt.setInt(6, idNivel);
+            stmt.setString(7, usuario);
+            stmt.setString(8, password);
+            stmt.setInt(9, valido);
+
+            // 4. Ejecutar la inserción
+            int filasAfectadas = stmt.executeUpdate();
+
+            // 5. Devolver true si se insertó al menos 1 fila
+            return (filasAfectadas > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("ERROR: El empleado que se ha tratado de insertar ya existía en la BD");
+        } finally {
+            // Cerrar recursos en el finally
+            if (stmt != null) {
+                try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+    }
+	
+	public boolean borrarEmpleado (String nifnie) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         
@@ -42,7 +93,8 @@ public class EmpleadoRepository {
         
         catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            throw new SQLException("ERROR: El empleado que se ha tratado "
+            		+ "de borrar no existe en la BD");
         } finally {
             if (stmt != null) {
                 try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }

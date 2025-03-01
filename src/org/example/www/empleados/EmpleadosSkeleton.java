@@ -7,7 +7,8 @@
  */
     package org.example.www.empleados;
 
-import ConexionDB.Conexion;
+import java.sql.SQLException;
+
 import ConexionDB.EmpleadoRepository;
 import exception.WSKeyNoValidaException;
 import utils.*;
@@ -16,6 +17,11 @@ import utils.*;
      *  EmpleadosSkeleton java skeleton for the axisService
      */
     public class EmpleadosSkeleton{
+    	private EmpleadoRepository empleadoRepository;
+    	
+    	public EmpleadosSkeleton() {
+    		this.empleadoRepository = new EmpleadoRepository();
+    	}
         
          
         /**
@@ -57,14 +63,18 @@ import utils.*;
          * 
                                      * @param nuevo 
              * @return nuevoResponse 
+         * @throws WSKeyNoValidaException 
+         * @throws SQLException 
          */
         
                  public org.example.www.empleados.NuevoResponse nuevo
                   (
                   org.example.www.empleados.Nuevo nuevo
-                  )
+                  ) throws WSKeyNoValidaException, SQLException
             {
-                     org.example.www.empleados.NuevoResponse response = new org.example.www.empleados.NuevoResponse();
+                     String WSKey = nuevo.getIn().getWSKey();
+                     
+                     Utils.verificarWSKey(WSKey);
                      
                      String nifnie = nuevo.getIn().getNifnie();
                      String naf = nuevo.getIn().getNaf();
@@ -78,9 +88,11 @@ import utils.*;
                      String usuario = nuevo.getIn().getUsuario();
                      String password = nuevo.getIn().getPassword();
                      int valido = nuevo.getIn().getValido();
+                     
+                     org.example.www.empleados.NuevoResponse response = new org.example.www.empleados.NuevoResponse();
+                     
 
-                     Conexion conexion = new Conexion();
-                     boolean exito = conexion.insertarEmpleado(
+                     boolean exito = this.empleadoRepository.insertarEmpleado(
                          nifnie,
                          nombreApellidos,
                          email,
@@ -111,23 +123,23 @@ import utils.*;
                                      * @param borrar 
              * @return borrarResponse 
          * @throws WSKeyNoValidaException 
+         * @throws SQLException 
          */
         
                  public org.example.www.empleados.BorrarResponse borrar
                   (
                   org.example.www.empleados.Borrar borrar
-                  ) throws WSKeyNoValidaException
+                  ) throws WSKeyNoValidaException, SQLException
             {
+                 	String WSKey = borrar.getWSKey();
+                 	
+              		Utils.verificarWSKey(WSKey);
                 	 
-                	BorrarResponse response = new BorrarResponse();
-                	 
-                	String WSKey = borrar.getWSKey();
-                	 
-             		Utils.verificarWSKey(WSKey);
-             		
              		String nifnie = borrar.getNifnie();
              		
              		Utils.validarNIFNIE(nifnie);
+             		
+                	BorrarResponse response = new BorrarResponse();
              		
              		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
              		
