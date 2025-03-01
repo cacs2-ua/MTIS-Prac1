@@ -55,6 +55,36 @@
                                }
                             
 
+                        /**
+                        * field for MensajeSalida
+                        */
+
+                        
+                                    protected java.lang.String localMensajeSalida ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMensajeSalida(){
+                               return localMensajeSalida;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param MensajeSalida
+                               */
+                               public void setMensajeSalida(java.lang.String param){
+                            
+                                            this.localMensajeSalida=param;
+                                       
+
+                               }
+                            
+
      
      
         /**
@@ -124,6 +154,24 @@
                                                } else {
                                                     xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localValido));
                                                }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    writeStartElement(null, namespace, "mensajeSalida", xmlWriter);
+                             
+
+                                          if (localMensajeSalida==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localMensajeSalida);
+                                            
+                                          }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -318,6 +366,15 @@
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localValido));
                             
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "mensajeSalida"));
+                                 
+                                        if (localMensajeSalida != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensajeSalida));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -408,6 +465,31 @@
                                     
                                               object.setValido(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensajeSalida").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensajeSalida" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setMensajeSalida(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     

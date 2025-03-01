@@ -103,11 +103,11 @@ import utils.*;
                              valido
                          );
                          
-                         response.setOut("Empleado Insertado Correctamente");
+                         response.setMensajeSalida("Empleado Insertado Correctamente. ");
                          
                          return response;
                 	 } catch (Exception e) {
-             			response.setOut(e.getMessage());
+             			response.setMensajeSalida(e.getMessage());
             			return response;
             		}
         }
@@ -141,12 +141,12 @@ import utils.*;
                  		
                  		empleadoRepository.borrarEmpleado(nifnie);
                  		
-                 		response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
+                 		response.setMensajeSalida("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito. ");
             
                  		return response;
                 		
                 	} catch (Exception e) {
-             			response.setOut(e.getMessage());
+             			response.setMensajeSalida(e.getMessage());
             			return response;
             		}
         }

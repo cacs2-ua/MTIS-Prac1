@@ -21,7 +21,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/ControlAccesos/",
                 "consultarResponse",
-                "ns1");
+                "ns3");
 
             
 
@@ -106,20 +106,20 @@
                              
 
                         /**
-                        * field for Mensaje
+                        * field for MensajeSalida
                         */
 
                         
-                                    protected java.lang.String localMensaje ;
+                                    protected java.lang.String localMensajeSalida ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localMensajeTracker = false ;
+                           protected boolean localMensajeSalidaTracker = false ;
 
-                           public boolean isMensajeSpecified(){
-                               return localMensajeTracker;
+                           public boolean isMensajeSalidaSpecified(){
+                               return localMensajeSalidaTracker;
                            }
 
                            
@@ -128,20 +128,20 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getMensaje(){
-                               return localMensaje;
+                           public  java.lang.String getMensajeSalida(){
+                               return localMensajeSalida;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Mensaje
+                               * @param param MensajeSalida
                                */
-                               public void setMensaje(java.lang.String param){
-                            localMensajeTracker = param != null;
+                               public void setMensajeSalida(java.lang.String param){
+                            localMensajeSalidaTracker = param != null;
                                    
-                                            this.localMensaje=param;
+                                            this.localMensajeSalida=param;
                                        
 
                                }
@@ -223,20 +223,20 @@
                                                throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
                                         
                                     }
-                                 } if (localMensajeTracker){
+                                 } if (localMensajeSalidaTracker){
                                     namespace = "";
-                                    writeStartElement(null, namespace, "mensaje", xmlWriter);
+                                    writeStartElement(null, namespace, "mensajeSalida", xmlWriter);
                              
 
-                                          if (localMensaje==null){
+                                          if (localMensajeSalida==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localMensaje);
+                                                   xmlWriter.writeCharacters(localMensajeSalida);
                                             
                                           }
                                     
@@ -249,7 +249,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/ControlAccesos/")){
-                return "ns1";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -447,14 +447,14 @@
                                     
                              }
 
-                        } if (localMensajeTracker){
+                        } if (localMensajeSalidaTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "mensaje"));
+                                                                      "mensajeSalida"));
                                  
-                                        if (localMensaje != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensaje));
+                                        if (localMensajeSalida != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensajeSalida));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("mensaje cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                         }
                                     }
 
@@ -583,17 +583,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensaje").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensajeSalida").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensaje" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensajeSalida" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setMensaje(
+                                              object.setMensajeSalida(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();

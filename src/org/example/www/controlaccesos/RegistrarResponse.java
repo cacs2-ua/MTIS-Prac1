@@ -21,35 +21,35 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/ControlAccesos/",
                 "registrarResponse",
-                "ns1");
+                "ns3");
 
             
 
                         /**
-                        * field for Out
+                        * field for MensajeSalida
                         */
 
                         
-                                    protected java.lang.String localOut ;
+                                    protected java.lang.String localMensajeSalida ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getOut(){
-                               return localOut;
+                           public  java.lang.String getMensajeSalida(){
+                               return localMensajeSalida;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Out
+                               * @param param MensajeSalida
                                */
-                               public void setOut(java.lang.String param){
+                               public void setMensajeSalida(java.lang.String param){
                             
-                                            this.localOut=param;
+                                            this.localMensajeSalida=param;
                                        
 
                                }
@@ -115,18 +115,18 @@
                    }
                
                                     namespace = "";
-                                    writeStartElement(null, namespace, "out", xmlWriter);
+                                    writeStartElement(null, namespace, "mensajeSalida", xmlWriter);
                              
 
-                                          if (localOut==null){
+                                          if (localMensajeSalida==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localOut);
+                                                   xmlWriter.writeCharacters(localMensajeSalida);
                                             
                                           }
                                     
@@ -139,7 +139,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/ControlAccesos/")){
-                return "ns1";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -318,12 +318,12 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "out"));
+                                                                      "mensajeSalida"));
                                  
-                                        if (localOut != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOut));
+                                        if (localMensajeSalida != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMensajeSalida));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                         }
                                     
 
@@ -404,17 +404,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","out").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensajeSalida").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"out" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"mensajeSalida" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setOut(
+                                              object.setMensajeSalida(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();

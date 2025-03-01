@@ -12,7 +12,7 @@
       <xsd:element name="nuevoResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="out" type="xsd:string"/>
+            <xsd:element name="mensajeSalida" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -29,7 +29,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="out" type="xsd:string"/>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -45,7 +45,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="out" type="xsd:string"/>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -62,7 +62,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
 
-      			<xsd:element name="out" type="tns:EmpleadosType"/>
+      			<xsd:element name="mensajeSalida" type="tns:EmpleadosType"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>

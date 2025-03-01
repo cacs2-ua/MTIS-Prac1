@@ -36,13 +36,13 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-                return -1;
+            	throw new SQLException("ERROR: El empleado con NIF/NIE: " + nifnie + 
+						"no existe en la BD");
             }
             
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("ERROR: El empleado con NIF/NIE: " + nifnie + 
-            						"no existe en la BD");
+            throw new SQLException(e.getMessage());
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
@@ -71,7 +71,8 @@ public class RegistroAccesosRepository {
             if (rs.next()) {
                 return rs.getInt("id");
             } else {
-                return -1;
+            	throw new SQLException("ERROR: La sala con codigo: " + codigoSala + 
+						"no existe en la BD");
             }
             
         } catch (SQLException e) {
@@ -191,6 +192,10 @@ public class RegistroAccesosRepository {
             stmt.setTimestamp(5, fechaHasta);
 
             rs = stmt.executeQuery();
+            if (!rs.next()) {
+                throw new SQLException("ERROR: No existen registros de acceso "
+                						+ "con las características especificadas. ");
+            }
 
             while (rs.next()) {
                 InstanciaRegistroAccesosType registro = new InstanciaRegistroAccesosType();

@@ -21,35 +21,35 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/Empleados/",
                 "consultarResponse",
-                "ns1");
+                "ns2");
 
             
 
                         /**
-                        * field for Out
+                        * field for MensajeSalida
                         */
 
                         
-                                    protected org.example.www.empleados.EmpleadosType localOut ;
+                                    protected org.example.www.empleados.EmpleadosType localMensajeSalida ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return org.example.www.empleados.EmpleadosType
                            */
-                           public  org.example.www.empleados.EmpleadosType getOut(){
-                               return localOut;
+                           public  org.example.www.empleados.EmpleadosType getMensajeSalida(){
+                               return localMensajeSalida;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Out
+                               * @param param MensajeSalida
                                */
-                               public void setOut(org.example.www.empleados.EmpleadosType param){
+                               public void setMensajeSalida(org.example.www.empleados.EmpleadosType param){
                             
-                                            this.localOut=param;
+                                            this.localMensajeSalida=param;
                                        
 
                                }
@@ -114,10 +114,10 @@
                
                    }
                
-                                            if (localOut==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                                            if (localMensajeSalida==null){
+                                                 throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                             }
-                                           localOut.serialize(new javax.xml.namespace.QName("","out"),
+                                           localMensajeSalida.serialize(new javax.xml.namespace.QName("","mensajeSalida"),
                                                xmlWriter);
                                         
                     xmlWriter.writeEndElement();
@@ -127,7 +127,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/Empleados/")){
-                return "ns1";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -306,13 +306,13 @@
 
                 
                             elementList.add(new javax.xml.namespace.QName("",
-                                                                      "out"));
+                                                                      "mensajeSalida"));
                             
                             
-                                    if (localOut==null){
-                                         throw new org.apache.axis2.databinding.ADBException("out cannot be null!!");
+                                    if (localMensajeSalida==null){
+                                         throw new org.apache.axis2.databinding.ADBException("mensajeSalida cannot be null!!");
                                     }
-                                    elementList.add(localOut);
+                                    elementList.add(localMensajeSalida);
                                 
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -392,9 +392,9 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","out").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","mensajeSalida").equals(reader.getName())){
                                 
-                                                object.setOut(org.example.www.empleados.EmpleadosType.Factory.parse(reader));
+                                                object.setMensajeSalida(org.example.www.empleados.EmpleadosType.Factory.parse(reader));
                                               
                                         reader.next();
                                     

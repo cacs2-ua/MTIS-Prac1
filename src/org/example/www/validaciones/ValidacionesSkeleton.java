@@ -31,6 +31,7 @@
     	    // Comprobamos que el IBAN no sea nulo y eliminamos posibles espacios en blanco.
     	    if (iban == null) {
     	        response.setValido(false);
+    	        response.setMensajeSalida("ERROR: El IBAN introducido no es válido. ");
     	        return response;
     	    }
     	    iban = iban.replaceAll("\\s+", "");
@@ -38,12 +39,14 @@
     	    // Verificamos que tenga exactamente 24 caracteres.
     	    if (iban.length() != 24) {
     	        response.setValido(false);
+    	        response.setMensajeSalida("ERROR: El IBAN introducido no es válido. ");
     	        return response;
     	    }
 
     	    // Comprobamos que el formato sea: dos letras seguidas de 22 dígitos.
     	    if (!iban.matches("^[A-Za-z]{2}[0-9]{22}$")) {
     	        response.setValido(false);
+    	        response.setMensajeSalida("ERROR: El IBAN introducido no es válido. ");
     	        return response;
     	    }
 
@@ -69,9 +72,11 @@
     	        boolean valid = ibanNumber.mod(java.math.BigInteger.valueOf(97)).intValue() == 1;
 
     	        response.setValido(valid);
+    	        response.setMensajeSalida("OK: El IBAN introducido es válido. ");
     	    } catch (Exception e) {
     	        // Si ocurre cualquier excepción, el IBAN se considera inválido.
     	        response.setValido(false);
+    	        response.setMensajeSalida(e.getMessage());
     	    }
 
     	    return response;
@@ -98,6 +103,7 @@
                 	    // Comprobamos que el NAF no sea nulo y cumpla el formato de 12 dígitos
                 	    if (naf == null || !naf.matches("^[0-9]{12}$")) {
                 	        response.setValido(false);
+                	        response.setMensajeSalida("ERROR: El NAF introducido no es válido. ");
                 	        return response;
                 	    }
                 	    
@@ -118,9 +124,11 @@
                 	        // Comparamos la letra de control calculada con la proporcionada
                 	        boolean valid = controlStr.equals(controlProvided);
                 	        response.setValido(valid);
+                	        response.setMensajeSalida("OK: El NAF introducido es válido. ");
                 	    } catch (NumberFormatException e) {
                 	        // Si ocurre un error al parsear la parte numérica, el NAF se considera inválido.
                 	        response.setValido(false);
+                	        response.setMensajeSalida(e.getMessage());
                 	    }
                 	    
                 	    return response;
@@ -144,6 +152,7 @@
                 	    // Primero comprobamos que el NIF no sea nulo y cumpla el formato: 8 dígitos seguidos de una letra.
                 	    if (nif == null || !nif.matches("^[0-9]{8}[A-Za-z]$")) {
                 	        response.setValido(false);
+                	        response.setMensajeSalida("ERROR: El NIF introducido no es válido. ");
                 	        return response;
                 	    }
 
@@ -160,9 +169,11 @@
                 	        // Comparamos la letra calculada con la letra del NIF.
                 	        boolean valido = (letraEsperada == letraNIF);
                 	        response.setValido(valido);
+                	        response.setMensajeSalida("OK: El NIF introducido es válido");
                 	    } catch (NumberFormatException e) {
                 	        // En caso de error al parsear el número, el NIF no es válido.
                 	        response.setValido(false);
+                	        response.setMensajeSalida(e.getMessage());
                 	    }
 
                 	    return response;
@@ -187,6 +198,7 @@
                 	    // Comprobar que el NIE no sea nulo y cumpla con el formato: [XYZ] seguido de 7 dígitos y una letra final.
                 	    if (nie == null || !nie.matches("^[XYZxyz][0-9]{7}[A-Za-z]$")) {
                 	        response.setValido(false);
+                	        response.setMensajeSalida("ERROR: El NIE introducido no es válido. ");
                 	        return response;
                 	    }
 
@@ -204,6 +216,7 @@
                 	        } else {
                 	            // Aunque la expresión regular garantiza solo X, Y o Z, se añade por seguridad.
                 	            response.setValido(false);
+                	            response.setMensajeSalida("ERROR: El NIE introducido no es válido. ");
                 	            return response;
                 	        }
 
@@ -220,10 +233,12 @@
 
                 	        // La validación es correcta si la letra calculada coincide con la letra del NIE
                 	        response.setValido(letraEsperada == letraNIE);
+                	        response.setMensajeSalida("OK: El NIE introducido es válido");
 
                 	    } catch (NumberFormatException e) {
                 	        // Si se produce algún error al convertir la parte numérica, el NIE no es válido
                 	        response.setValido(false);
+                	        response.setMensajeSalida(e.getMessage());
                 	    }
 
                 	    return response;

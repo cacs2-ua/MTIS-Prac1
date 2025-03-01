@@ -55,11 +55,12 @@ public class ControlAccesosSkeleton{
                     .consultarRegistrosAcceso(nifNie, codigoSala, codigoDispositivo, fechaDesde, fechaHasta);
 
             response.setOut(registros.toArray(new InstanciaRegistroAccesosType[0]));
+            response.setMensajeSalida("Consulta de registros de acceso realizada con éxito. ");
              
             return response;
             
 		} catch (Exception e) {
-			response.setMensaje(e.getMessage());
+			response.setMensajeSalida(e.getMessage());
 			return response;
 		}
     }
@@ -97,12 +98,12 @@ public class ControlAccesosSkeleton{
             		 codigoSala, 
             		 codigoDispositivo
             		 );
-             response.setOut("RegistroAcceso Insertado Correctamente");
+             response.setMensajeSalida("RegistroAcceso Insertado Correctamente");
              
              return response;
     		 
     	 } catch (Exception e) {
- 			response.setOut(e.getMessage());
+ 			response.setMensajeSalida(e.getMessage());
 			return response;
 		}
      }

@@ -12,7 +12,8 @@
       <xsd:element name="validarNIFResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="valido" type="xsd:boolean"/>
+          	<xsd:element name="valido" type="xsd:boolean" />
+          	<xsd:element name="mensajeSalida" type="xsd:string"></xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -29,6 +30,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"></xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -45,6 +47,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"></xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -61,6 +64,7 @@
       		<xsd:sequence>
 
       			<xsd:element name="valido" type="xsd:boolean"></xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
