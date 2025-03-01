@@ -5,7 +5,7 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST)
  */
-    package org.example.www.empleados;
+package org.example.www.empleados;
 
 import java.sql.SQLException;
 
@@ -38,7 +38,7 @@ import utils.*;
             {
                 //TODO : fill this with the necessary business logic
                 throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#modificar");
-        }
+            }
      
          
         /**
@@ -72,42 +72,44 @@ import utils.*;
                   org.example.www.empleados.Nuevo nuevo
                   ) throws WSKeyNoValidaException, SQLException
             {
-                     String WSKey = nuevo.getIn().getWSKey();
-                     
-                     Utils.verificarWSKey(WSKey);
-                     
-                     String nifnie = nuevo.getIn().getNifnie();
-                     String naf = nuevo.getIn().getNaf();
-                     String iban = nuevo.getIn().getIban();
-                     
-                     Utils.validarEmpleado(nifnie, naf, iban);
-                     
-                     String nombreApellidos = nuevo.getIn().getNombreApellidos();
-                     String email = nuevo.getIn().getEmail();
-                     int idNivel = nuevo.getIn().getIdNivel();
-                     String usuario = nuevo.getIn().getUsuario();
-                     String password = nuevo.getIn().getPassword();
-                     int valido = nuevo.getIn().getValido();
-                     
-                     org.example.www.empleados.NuevoResponse response = new org.example.www.empleados.NuevoResponse();
-                     
-
-                     this.empleadoRepository.insertarEmpleado(
-                         nifnie,
-                         nombreApellidos,
-                         email,
-                         naf,
-                         iban,
-                         idNivel,
-                         usuario,
-                         password,
-                         valido
-                     );
-                     
-                     response.setOut("Empleado Insertado Correctamente");
-                     
-                     return response;
-                	 
+                     NuevoResponse response = new NuevoResponse();
+                	 try {
+                         String WSKey = nuevo.getIn().getWSKey();
+                         
+                         Utils.verificarWSKey(WSKey);
+                         
+                         String nifnie = nuevo.getIn().getNifnie();
+                         String naf = nuevo.getIn().getNaf();
+                         String iban = nuevo.getIn().getIban();
+                         
+                         Utils.validarEmpleado(nifnie, naf, iban);
+                         
+                         String nombreApellidos = nuevo.getIn().getNombreApellidos();
+                         String email = nuevo.getIn().getEmail();
+                         int idNivel = nuevo.getIn().getIdNivel();
+                         String usuario = nuevo.getIn().getUsuario();
+                         String password = nuevo.getIn().getPassword();
+                         int valido = nuevo.getIn().getValido();
+                         
+                         this.empleadoRepository.insertarEmpleado(
+                             nifnie,
+                             nombreApellidos,
+                             email,
+                             naf,
+                             iban,
+                             idNivel,
+                             usuario,
+                             password,
+                             valido
+                         );
+                         
+                         response.setOut("Empleado Insertado Correctamente");
+                         
+                         return response;
+                	 } catch (Exception e) {
+             			response.setOut(e.getMessage());
+            			return response;
+            		}
         }
      
          
@@ -125,23 +127,28 @@ import utils.*;
                   org.example.www.empleados.Borrar borrar
                   ) throws WSKeyNoValidaException, SQLException
             {
-                 	String WSKey = borrar.getWSKey();
-                 	
-              		Utils.verificarWSKey(WSKey);
-                	 
-             		String nifnie = borrar.getNifnie();
-             		
-             		Utils.validarNIFNIE(nifnie);
-             		
-                	BorrarResponse response = new BorrarResponse();
-             		
-             		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
-             		
-             		empleadoRepository.borrarEmpleado(nifnie);
-             		
-             		response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
-        
-             		return response;
+                 	BorrarResponse response = new BorrarResponse();
+                	try {
+                     	String WSKey = borrar.getWSKey();
+                     	
+                  		Utils.verificarWSKey(WSKey);
+                    	 
+                 		String nifnie = borrar.getNifnie();
+                 		
+                 		Utils.validarNIFNIE(nifnie);
+                 		
+                 		EmpleadoRepository empleadoRepository = new EmpleadoRepository ();
+                 		
+                 		empleadoRepository.borrarEmpleado(nifnie);
+                 		
+                 		response.setOut("El empleado con nifnie: " + nifnie + " ha sido borrado con éxito");
+            
+                 		return response;
+                		
+                	} catch (Exception e) {
+             			response.setOut(e.getMessage());
+            			return response;
+            		}
         }
      
     }

@@ -9,7 +9,7 @@ public final class Utils {
     private static final ValidacionesSkeleton validaciones = new ValidacionesSkeleton();
 	
     private Utils() {
-        throw new UnsupportedOperationException("No se puede instanciar esta clase.");
+        throw new UnsupportedOperationException("ERROR: No se puede instanciar esta clase.");
     }
     
     public static void verificarWSKey(String WSKey) throws WSKeyNoValidaException {
@@ -18,7 +18,7 @@ public final class Utils {
         String WSKeyDB = cn.obtenerWSKey();
         
 		if (!WSKeyDB.equals(WSKey)){
-			throw new WSKeyNoValidaException("Acceso no autorizado: WSKey no válida.");
+			throw new WSKeyNoValidaException("ERROR: Acceso no autorizado: WSKey no válida.");
 		}
 		
     }
@@ -95,19 +95,19 @@ public final class Utils {
     	}
     	
     	if (esFormatoNIF(nifnie) && !validarNIF(nifnie)) {
-    		throw new InvalidNIFException("El NIF proporcionado no es válido: " + nifnie);
+    		throw new InvalidNIFException("ERROR: El NIF proporcionado no es válido: " + nifnie);
     	}
     	
     	if (esFormatoNIE(nifnie) && !validarNIE(nifnie)) {
-    		throw new InvalidNIEException("El NIE proporcionado no es válido: " + nifnie);
+    		throw new InvalidNIEException("ERROR: El NIE proporcionado no es válido: " + nifnie);
     	}
     	
     	if (!validarNAF(NAF)) {
-    		throw new InvalidNAFException("El NAF proporcionado no es válido: " + NAF);
+    		throw new InvalidNAFException("ERROR: El NAF proporcionado no es válido: " + NAF);
     	}
     	
     	if (!validarIBAN(IBAN)) {
-    		throw new InvalidIBANException("El IBAN proporcionado no es válido: " + IBAN);
+    		throw new InvalidIBANException("ERROR: El IBAN proporcionado no es válido: " + IBAN);
     	}
     	
     }
