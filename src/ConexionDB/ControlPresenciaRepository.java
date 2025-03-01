@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.example.www.controlpresencia.ControlPresenciaOperationType;
+import org.example.www.controlpresencia.EmpleadosType;
 
 
 public class ControlPresenciaRepository {
@@ -169,5 +170,44 @@ public class ControlPresenciaRepository {
         }
     	
     }
+    
+    public EmpleadosType controlEmpleadosSala(int codigoSala) {
+        List<EmpleadosType> registros = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+        	con = this.conexion.conectar();
+        	
+        	int idSala = obtenerIdSalaAPartirDeCodigoSala(codigoSala);
+        	
+        	String sql = "SELECT e.* FROM empleados e "
+        				+ "JOIN registroaccesos r on r.idEmpleado = e.id "
+        				+ "JOIN salas s on r.idSala = s.id "
+        				+ "WHERE s.id = ?;";
+        	stmt = con.prepareStatement(sql);
+        	stmt.setInt(1, idSala);
+        	rs = stmt.executeQuery();
+            if (!rs.next()) {
+                throw new NoSuchElementException("ADVERTENCIA: No existen usuarios asignados a "
+                								+ "controles de presencia "
+                								+ "con las caracteristicas especificadas. ");
+            }
+            
+            while (rs.next()) {
+            	EmpleadosType registro = new InstanciaRegistroAccesosType();
+                registro.setId(param);(rs.getInt("id"));
+
+                
+                Calendar fechaHora = Calendar.getInstance();
+                fechaHora.setTimeInMillis(rs.getTimestamp("fechaHora").getTime());
+                registro.setFechaHora(fechaHora);
+
+                registros.add(registro);
+            }
+        }
+    }
+    
 
 }

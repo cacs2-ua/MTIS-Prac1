@@ -17,7 +17,7 @@ import org.example.www.controlaccesos.InstanciaRegistroAccesosType;
 public class RegistroAccesosRepository {
     private Conexion conexion;
 
-    // Constructor que inicializa la conexión
+    // Constructor que inicializa la conexiï¿½n
     public RegistroAccesosRepository() {
         this.conexion = new Conexion();
     }
@@ -193,7 +193,7 @@ public class RegistroAccesosRepository {
 
             rs = stmt.executeQuery();
             if (!rs.next()) {
-                throw new SQLException("ADVERTENCIA: No existen registros de acceso "
+                throw new NoSuchElementException("ADVERTENCIA: No existen registros de acceso "
                 						+ "con las caracteristicas especificadas. ");
             }
 
