@@ -67,10 +67,13 @@ import utils.*;
                      org.example.www.empleados.NuevoResponse response = new org.example.www.empleados.NuevoResponse();
                      
                      String nifnie = nuevo.getIn().getNifnie();
-                     String nombreApellidos = nuevo.getIn().getNombreApellidos();
-                     String email = nuevo.getIn().getEmail();
                      String naf = nuevo.getIn().getNaf();
                      String iban = nuevo.getIn().getIban();
+                     
+                     Utils.validarEmpleado(nifnie, naf, iban);
+                     
+                     String nombreApellidos = nuevo.getIn().getNombreApellidos();
+                     String email = nuevo.getIn().getEmail();
                      int idNivel = nuevo.getIn().getIdNivel();
                      String usuario = nuevo.getIn().getUsuario();
                      String password = nuevo.getIn().getPassword();
