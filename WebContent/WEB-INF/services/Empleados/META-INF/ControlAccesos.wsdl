@@ -5,7 +5,8 @@
       <xsd:element name="registrar">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="in" type="tns:RegistroAccesosType"/>
+          	<xsd:element name="in" type="tns:RegistroAccesosType"/>
+          	<xsd:element name="WSKey" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -19,7 +20,8 @@
       <xsd:element name="consultar">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="in" type="tns:FechasRegistroAccesosType"/>
+          	<xsd:element name="in" type="tns:FechasRegistroAccesosType"/>
+          	<xsd:element name="WSKey" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -37,7 +39,7 @@
         	<xsd:element name="nifnie" type="xsd:string"/>
         	<xsd:element name="codigoSala" type="xsd:int"/>
         	<xsd:element name="codigoDispositivo" type="xsd:int"/>
-        	<xsd:element name="WSKey" type="xsd:string"/>
+
         </xsd:sequence>
       </xsd:complexType>
 
@@ -58,7 +60,7 @@
         	<xsd:element name="codigoDispositivo" type="xsd:int"/>
         	<xsd:element name="fechaDesde" type="xsd:dateTime"/>
         	<xsd:element name="fechaHasta" type="xsd:dateTime"/>
-        	<xsd:element name="WSKey" type="xsd:string"/>
+
         </xsd:sequence>
       </xsd:complexType>
 

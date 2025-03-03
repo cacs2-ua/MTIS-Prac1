@@ -56,7 +56,8 @@
       		<xsd:sequence>
 
       			<xsd:element name="nifnie" type="xsd:string"/>
-      			<xsd:element maxOccurs="1" minOccurs="1" name="WSKey" type="xsd:string"/>
+
+      			<xsd:element name="WSKey" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>

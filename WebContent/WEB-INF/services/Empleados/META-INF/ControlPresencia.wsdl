@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ControlPresencia" targetNamespace="http://www.example.org/ControlPresencia/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/ControlPresencia/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/ControlPresencia/">
+      <xsd:element name="registrar">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="in" type="tns:ControlPresenciaOperationType"/>
+          	<xsd:element name="WSKey" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="registrarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mensajeSalida" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="eliminar">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="in" type="tns:ControlPresenciaOperationType">
+      			</xsd:element>
+      			<xsd:element name="WSKey" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="eliminarResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="controlEmpleadoSala">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="codigoSala" type="xsd:int"/>
+      			<xsd:element name="WSKey" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="controlEmpleadoSalaResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="empleadosOut" type="tns:EmpleadosType">
+      			</xsd:element>
+      			<xsd:element name="mensajeSalida" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="ControlPresenciaOperationType">
+      	<xsd:sequence>
+      		<xsd:element name="nifnie" type="xsd:string"/>
+      		<xsd:element name="codigoSala" type="xsd:int"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="EmpleadosType">
+      	<xsd:sequence>
+      		<xsd:element name="nifnie" type="xsd:string"/>
+      		<xsd:element name="nombreApellidos" type="xsd:string"/>
+      		<xsd:element name="email" type="xsd:string"/>
+      		<xsd:element name="naf" type="xsd:string"/>
+      		<xsd:element name="iban" type="xsd:string"/>
+      		<xsd:element name="idNivel" type="xsd:int"/>
+      		<xsd:element name="usuario" type="xsd:string"/>
+      		<xsd:element name="password" type="xsd:string"/>
+      		<xsd:element name="valido" type="xsd:int"/>
+      		<xsd:element name="id" type="xsd:int"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="eliminarRequest">
+    <wsdl:part name="parameters" element="tns:eliminar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="controlEmpleadoSalaResponse">
+    <wsdl:part name="parameters" element="tns:controlEmpleadoSalaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarRequest">
+    <wsdl:part name="parameters" element="tns:registrar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarResponse">
+    <wsdl:part name="parameters" element="tns:registrarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminarResponse">
+    <wsdl:part name="parameters" element="tns:eliminarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="controlEmpleadoSalaRequest">
+    <wsdl:part name="parameters" element="tns:controlEmpleadoSala">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ControlPresencia">
+    <wsdl:operation name="registrar">
+      <wsdl:input message="tns:registrarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:registrarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminar">
+      <wsdl:input message="tns:eliminarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:eliminarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="controlEmpleadoSala">
+      <wsdl:input message="tns:controlEmpleadoSalaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:controlEmpleadoSalaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ControlPresenciaSOAP" type="tns:ControlPresencia">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="registrar">
+      <soap:operation soapAction="http://www.example.org/ControlPresencia/registrar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminar">
+      <soap:operation soapAction="http://www.example.org/ControlPresencia/eliminar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="controlEmpleadoSala">
+      <soap:operation soapAction="http://www.example.org/ControlPresencia/controlEmpleadoSala"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ControlPresencia">
+    <wsdl:port name="ControlPresenciaSOAP" binding="tns:ControlPresenciaSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
